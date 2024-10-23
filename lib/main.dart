@@ -22,7 +22,25 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white70,
+      floatingActionButton: Container(
+        height: 54,
+        width: 54,
+        child: FittedBox(
+          child: FloatingActionButton(
+            backgroundColor: Color(0xFFFC4402),
+            foregroundColor: Colors.white,
+            shape: CircleBorder(),
+            onPressed: () {
+              //TODO
+            },
+            child: Icon(
+              Icons.add,
+              size: 35,
+            ),
+          ),
+        ),
+      ),
+      backgroundColor: Color(0xFFE9ECF4),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SafeArea(
@@ -30,7 +48,7 @@ class HomePage extends StatelessWidget {
           children: [
             MyAppBar(),
             MySearchBar(),
-            Chips(),
+            ChipBar(),
             Expanded(
                 child: ListView(
               padding: EdgeInsets.all(8),
@@ -70,15 +88,28 @@ class MySearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-      child: SearchBar(
-        leading: const Icon(
-          Icons.search,
-          color: Colors.black,
+      child: Container(
+        height: 48,
+        child: SearchBar(
+          leading: Container(
+            height: 20,
+            width: 20,
+            child: const Icon(
+              Icons.search,
+              color: Color(0xFFBCC4DC),
+            ),
+          ),
+          hintText: 'Search...',
+          hintStyle: WidgetStatePropertyAll(TextStyle(
+            fontFamily: 'FilsonPro',
+            color: Color(0xFFBCC4DC),
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+          )),
+          backgroundColor: const WidgetStatePropertyAll(Colors.white),
+          shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
         ),
-        hintText: 'Search...',
-        backgroundColor: const WidgetStatePropertyAll(Colors.white),
-        shape: WidgetStatePropertyAll(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
       ),
     );
   }
@@ -96,10 +127,10 @@ class UserContainer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ProfilePhoto(
-              totalWidth: 70,
+              totalWidth: 40,
               cornerRadius: 80,
               color: Colors.blue,
-              image: const AssetImage('assets/profile_picture.jpg'),
+              image: const AssetImage('assets/profile_picture.jpeg'),
             ),
           ),
           Padding(
@@ -122,13 +153,13 @@ class UserContainer extends StatelessWidget {
   }
 }
 
-class Chips extends StatelessWidget {
+class ChipBar extends StatelessWidget {
   final List<String> chipLabels = [
     'Offline',
     'Online',
     'Parental',
     'Sick',
-    'Something'
+    'Vacation'
   ];
   @override
   Widget build(BuildContext context) {
@@ -141,9 +172,17 @@ class Chips extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(3.0),
               child: Chip(
-                label: Text(chipLabels[index]),
+                backgroundColor: Color(0xFFE9ECF4),
+                side: BorderSide(color: Color(0xFFBCC4DC)),
+                label: Text(
+                  chipLabels[index],
+                  style: TextStyle(
+                      color: Color(0xFFBCC4DC),
+                      fontSize: 13,
+                      fontFamily: 'FilsonPro'),
+                ),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                    borderRadius: BorderRadius.all(Radius.circular(25))),
               ),
             );
           }),
@@ -156,48 +195,76 @@ class MyAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ProfilePhoto(
-          totalWidth: 70,
-          cornerRadius: 80,
-          color: Colors.blue,
-          image: const AssetImage('assets/profile_picture.jpg'),
-        ),
-        const SizedBox(
-          width: 30,
-        ),
-        const Expanded(
-          child: Text(
-            'Home',
-            style: TextStyle(fontSize: 30),
+    return Container(
+      height: 44,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          /*ProfilePhoto(
+            totalWidth: 44,
+            cornerRadius: 80,
+            color: Colors.blue,
+            image: const AssetImage('assets/profile_picture.jpeg'),
+          )*/
+          Container(
+            height: 44.0,
+            width: 44.0,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/profile_picture.jpeg'),
+                fit: BoxFit.fill,
+              ),
+              shape: BoxShape.circle,
+            ),
           ),
-        ),
-        RawMaterialButton(
-          onPressed: () {},
-          elevation: 2.0,
-          fillColor: Colors.white,
-          padding: const EdgeInsets.all(14.0),
-          shape: const CircleBorder(),
-          child: Icon(
-            Icons.calendar_month,
-            size: 25.0,
-            color: Colors.black,
+          const SizedBox(
+            width: 15,
           ),
-        ),
-        RawMaterialButton(
-          onPressed: () {},
-          elevation: 2.0,
-          fillColor: Colors.white,
-          padding: const EdgeInsets.all(14.0),
-          shape: const CircleBorder(),
-          child: Icon(
-            Icons.notifications,
-            size: 25.0,
-            color: Colors.black,
+          const Expanded(
+            child: Text(
+              'Home',
+              style: TextStyle(
+                fontFamily: 'FilsonPro',
+                  fontSize: 27,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF3D4766)),
+            ),
           ),
-        )
-      ],
+          Container(
+            height: 44,
+            width: 44,
+            child: RawMaterialButton(
+              onPressed: () {},
+              elevation: 2.0,
+              fillColor: Colors.white,
+              shape: const CircleBorder(),
+              child: Icon(
+                Icons.calendar_month,
+                size: 20.0,
+                color: Color(0xFF3D4766),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 12,
+          ),
+          Container(
+            height: 44,
+            width: 44,
+            child: RawMaterialButton(
+              onPressed: () {},
+              elevation: 2.0,
+              fillColor: Colors.white,
+              shape: const CircleBorder(),
+              child: Icon(
+                Icons.notifications_none_outlined,
+                size: 20.0,
+                color: Color(0xFF3D4766),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
