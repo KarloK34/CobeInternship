@@ -1,0 +1,1 @@
+enum RequestVisibility { everyone, adminOnly }
