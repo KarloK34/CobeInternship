@@ -1,5 +1,7 @@
+import 'package:first_project/providers/user_provider.dart';
 import 'package:first_project/screens/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,8 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return ChangeNotifierProvider(
+      create: (_) => UserProvider(),
+      child: const MaterialApp(
+        home: HomePage(),
+      ),
     );
   }
 }

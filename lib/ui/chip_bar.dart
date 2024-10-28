@@ -1,7 +1,9 @@
 import 'package:first_project/enums/chip_type.dart';
+import 'package:first_project/providers/user_provider.dart';
 import 'package:first_project/ui/my_chip.dart';
 import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChipBar extends StatefulWidget {
   const ChipBar({super.key});
@@ -16,7 +18,10 @@ class _ChipBarState extends State<ChipBar> {
   void _toggle(String key) {
     setState(() {
       chipLabels.forEach((k, value) {
-        chipLabels[k] = k == key ? !value : false;
+        if (k == key) {
+          chipLabels[k] = !value;
+          context.read<UserProvider>().toggleFilter(key);
+        }
       });
     });
   }
