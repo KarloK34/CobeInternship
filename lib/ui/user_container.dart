@@ -25,9 +25,7 @@ class UserContainer extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const SizedBox(
-              width: 16,
-            ),
+            const SizedBox(width: 16),
             Stack(
               alignment: Alignment.topRight,
               children: [
@@ -55,9 +53,7 @@ class UserContainer extends StatelessWidget {
                   )
               ],
             ),
-            const SizedBox(
-              width: 20,
-            ),
+            const SizedBox(width: 20),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,

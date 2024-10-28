@@ -40,9 +40,7 @@ class UserDetails extends StatelessWidget {
                 chipType: ChipType.connection,
                 connectionStatus: user.status,
               ),
-              const SizedBox(
-                width: 20,
-              ),
+              const SizedBox(width: 20),
               Text(
                 user.isAbsent ? 'Unavailable' : 'Available',
                 style: TextStyles.regular15,

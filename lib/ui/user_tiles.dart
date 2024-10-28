@@ -18,9 +18,7 @@ class UserTiles extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 10),
-            child: UserContainer(
-              user: users[index],
-            ),
+            child: UserContainer(user: users[index]),
           );
         },
       ),

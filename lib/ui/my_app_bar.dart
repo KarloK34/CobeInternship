@@ -23,17 +23,11 @@ class MyAppBar extends StatelessWidget {
               shape: BoxShape.circle,
             ),
           ),
-          const SizedBox(
-            width: 15,
-          ),
+          const SizedBox(width: 15),
           const Expanded(
             child: Text(
               'Home',
-              style: TextStyle(
-                  fontFamily: AppFonts.filsonPro,
-                  fontSize: 27,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xFF3D4766)),
+              style: TextStyle(fontFamily: AppFonts.filsonPro, fontSize: 27, fontWeight: FontWeight.w700, color: Color(0xFF3D4766)),
             ),
           ),
           SizedBox(
@@ -51,9 +45,7 @@ class MyAppBar extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            width: 12,
-          ),
+          const SizedBox(width: 12),
           SizedBox(
             height: 44,
             width: 44,

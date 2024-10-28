@@ -78,20 +78,4 @@ class MyChip extends StatelessWidget {
         return Colors.grey;
     }
   }
-
-  /* return Container(
-        height: 80,
-        padding: const EdgeInsets.all(3),
-        child: Chip(
-          label: Text(
-            chipLabel,
-            style: TextStyle(color: textColor, fontSize: 13, fontFamily: AppFonts.filsonPro),
-          ),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-            Radius.circular(25),
-          )),
-          backgroundColor: color,
-          side: const BorderSide(color: Color(0xFFBCC4DC)),
-        )); */
 }

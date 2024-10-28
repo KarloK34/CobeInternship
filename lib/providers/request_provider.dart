@@ -6,13 +6,12 @@ import 'package:flutter/material.dart';
 
 class RequestProvider extends ChangeNotifier {
   final List<User> users;
+  List<LeaveRequest> _requests = [];
 
   RequestProvider({required this.users}) {
     _initializeRequests();
   }
-  List<LeaveRequest> _requests = [];
 
-  List<LeaveRequest> get requests => _requests;
 
   void _initializeRequests() {
     _requests = [
@@ -40,4 +39,6 @@ class RequestProvider extends ChangeNotifier {
     ];
     notifyListeners();
   }
+
+  List<LeaveRequest> get requests => _requests;
 }

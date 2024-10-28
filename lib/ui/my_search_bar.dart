@@ -57,9 +57,7 @@ class _MySearchBarState extends State<MySearchBar> {
           ),
         ),
         backgroundColor: const WidgetStatePropertyAll(Colors.white),
-        shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        ),
+        shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
       ),
     );
   }

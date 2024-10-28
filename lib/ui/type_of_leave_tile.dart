@@ -52,13 +52,9 @@ class TypeOfLeaveTile extends StatelessWidget {
                   ),
                   child: IconButton(
                       color: AppColors.labelColorLightThemePrimary,
-                      style: const ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(AppColors.buttonSecond),
-                      ),
+                      style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppColors.buttonSecond)),
                       onPressed: () {},
-                      icon: const Icon(
-                        Icons.arrow_forward,
-                      )),
+                      icon: const Icon(Icons.arrow_forward)),
                 ),
               ],
             ),

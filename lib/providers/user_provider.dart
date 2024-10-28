@@ -48,9 +48,6 @@ class UserProvider extends ChangeNotifier {
     _filteredUsers = _users;
   }
 
-  List<User> get users => _filteredUsers;
-  String get searchQuery => _searchQuery;
-
   void updateSearchQuery(String query) {
     _searchQuery = query.trim();
     _applyFilters();
@@ -91,14 +88,8 @@ class UserProvider extends ChangeNotifier {
     }).toList();
 
     notifyListeners();
-
-    /* if (_selectedFilters.isEmpty) return true;
-      if (_selectedFilters.contains('Online') && user.status == ConnectionStatus.Online) return true;
-      if (_selectedFilters.contains('Offline') && user.status == ConnectionStatus.Offline) return true;
-      if (_selectedFilters.contains('Sick') && user.requests.where((request) => request.type == LeaveType.Sick).toList().isNotEmpty) return true;
-      if (_selectedFilters.contains('Vacation') && user.requests.where((request) => request.type == LeaveType.Vacation).toList().isNotEmpty) return true;
-      if (_selectedFilters.contains('Parental') && user.requests.where((request) => request.type == LeaveType.Parental).toList().isNotEmpty) return true;
-      return false;
-    }).toList(); */
   }
+
+  List<User> get users => _filteredUsers;
+  String get searchQuery => _searchQuery;
 }
