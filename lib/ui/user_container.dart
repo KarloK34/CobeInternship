@@ -11,14 +11,12 @@ class UserContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Image profilePicture = user.profilePicture;
-
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PublicProfilePage(user: user),
-          )),
+      onTap: () => Navigator.pushNamed(
+        context,
+        PublicProfilePage.routeName,
+        arguments: user,
+      ),
       child: Container(
         height: 96,
         decoration: BoxDecoration(
@@ -38,7 +36,7 @@ class UserContainer extends StatelessWidget {
                   width: 56.0,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: profilePicture.image,
+                      image: AssetImage(user.profilePicture),
                       fit: BoxFit.fitWidth,
                     ),
                     shape: BoxShape.circle,

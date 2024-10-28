@@ -6,6 +6,8 @@ import 'package:first_project/ui/user_tiles.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
+  static const routeName = '/';
+
   const HomePage({super.key});
 
   @override
@@ -17,18 +19,7 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         child: SafeArea(
           child: Column(
-            children: [
-              MyAppBar(),
-              MySearchBar(),
-              SizedBox(
-                height: 10,
-              ),
-              ChipBar(),
-              SizedBox(
-                height: 10,
-              ),
-              UserTiles()
-            ],
+            children: [MyAppBar(), MySearchBar(), SizedBox(height: 10), ChipBar(), SizedBox(height: 10), UserTiles()],
           ),
         ),
       ),

@@ -2,29 +2,29 @@ import 'package:first_project/enums/connection_status.dart';
 import 'package:first_project/enums/leave_type.dart';
 import 'package:first_project/enums/request_visibility.dart';
 import 'package:first_project/enums/role.dart';
-import 'package:first_project/models/request.dart';
+import 'package:first_project/models/leave_request.dart';
 import 'package:first_project/models/user.dart';
 import 'package:first_project/utilities/app_images.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider extends ChangeNotifier {
   final List<User> _users = [
-    User('Karlo', 'Kraml', Role.Student, Image.asset(AppImages.dummyProfile), ConnectionStatus.Online, requests: [
-      Request(
+    User('Karlo', 'Kraml', Role.Student, AppImages.dummyProfile, ConnectionStatus.Online, requests: [
+      LeaveRequest(
         DateTime(2024, 10, 28),
         DateTime(2024, 11, 5),
         LeaveType.Sick,
         RequestVisibility.everyone,
         'Flu',
       ),
-      Request(
+      LeaveRequest(
         DateTime(2024, 10, 30),
         DateTime(2024, 11, 1),
         LeaveType.Vacation,
         RequestVisibility.everyone,
         'Flu',
       ),
-      Request(
+      LeaveRequest(
         DateTime(2024, 10, 29),
         DateTime(2024, 11, 9),
         LeaveType.Vacation,
@@ -36,7 +36,7 @@ class UserProvider extends ChangeNotifier {
       'Davor',
       'Štajcer',
       Role.Employee,
-      Image.asset(AppImages.dummyProfile2),
+      AppImages.dummyProfile2,
       ConnectionStatus.Offline,
     ),
   ];

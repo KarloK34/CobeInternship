@@ -5,6 +5,8 @@ import 'package:first_project/ui/user_details.dart';
 import 'package:flutter/material.dart';
 
 class PublicProfilePage extends StatelessWidget {
+  static const routeName = '/publicProfile';
+
   final User user;
   const PublicProfilePage({super.key, required this.user});
 
@@ -20,8 +22,8 @@ class PublicProfilePage extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    Image(
-                      image: user.profilePicture.image,
+                    Image.asset(
+                      user.profilePicture,
                       height: 372,
                       width: double.infinity,
                       fit: BoxFit.cover,

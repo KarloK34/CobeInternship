@@ -1,13 +1,13 @@
 import 'package:first_project/enums/chip_type.dart';
 import 'package:first_project/enums/connection_status.dart';
-import 'package:first_project/enums/request_status.dart';
+import 'package:first_project/enums/leave_request_status.dart';
 import 'package:first_project/utilities/app_colors.dart';
 import 'package:first_project/utilities/app_fonts.dart';
 import 'package:flutter/material.dart';
 
 class MyChip extends StatelessWidget {
   final ChipType chipType;
-  final RequestStatus? requestStatus;
+  final LeaveRequestStatus? requestStatus;
   final ConnectionStatus? connectionStatus;
   final String? label;
   final Color? color;
@@ -55,13 +55,13 @@ class MyChip extends StatelessWidget {
     );
   }
 
-  Color _getRequestColor(RequestStatus? requestStatus) {
+  Color _getRequestColor(LeaveRequestStatus? requestStatus) {
     switch (requestStatus) {
-      case RequestStatus.Approved:
+      case LeaveRequestStatus.Approved:
         return AppColors.green;
-      case RequestStatus.Pending:
+      case LeaveRequestStatus.Pending:
         return AppColors.yellow;
-      case RequestStatus.Rejected:
+      case LeaveRequestStatus.Rejected:
         return AppColors.red;
       default:
         return Colors.grey;
