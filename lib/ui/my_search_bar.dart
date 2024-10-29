@@ -1,4 +1,4 @@
-import 'package:first_project/providers/user_provider.dart';
+import 'package:first_project/providers/user_notifier.dart';
 import 'package:first_project/utilities/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +22,7 @@ class _MySearchBarState extends State<MySearchBar> {
 
     _controller.addListener(() {
       final query = _controller.text;
-      context.read<UserProvider>().updateSearchQuery(query);
+      context.read<UserNotifier>().updateSearchQuery(query);
     });
   }
 

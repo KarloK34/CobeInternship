@@ -1,5 +1,5 @@
 import 'package:first_project/enums/chip_type.dart';
-import 'package:first_project/providers/user_provider.dart';
+import 'package:first_project/providers/user_notifier.dart';
 import 'package:first_project/ui/my_chip.dart';
 import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class _ChipBarState extends State<ChipBar> {
       chipLabels.forEach((k, value) {
         if (k == key) {
           chipLabels[k] = !value;
-          context.read<UserProvider>().toggleFilter(key);
+          context.read<UserNotifier>().toggleFilter(key);
         }
       });
     });

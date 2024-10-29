@@ -19,7 +19,14 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         child: SafeArea(
           child: Column(
-            children: [MyAppBar(), MySearchBar(), SizedBox(height: 10), ChipBar(), SizedBox(height: 10), UserTiles()],
+            children: [
+              MyAppBar(),
+              MySearchBar(),
+              SizedBox(height: 10),
+              ChipBar(),
+              SizedBox(height: 10),
+              UserTiles(),
+            ],
           ),
         ),
       ),
