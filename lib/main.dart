@@ -1,4 +1,5 @@
 import 'package:first_project/notifiers/all_users_notifier.dart';
+import 'package:first_project/notifiers/filtered_users_notifier.dart';
 import 'package:first_project/notifiers/filters_notifier.dart';
 import 'package:first_project/notifiers/search_query_notifier.dart';
 import 'package:first_project/routes/app_routes.dart';
@@ -17,12 +18,28 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => AllUsersNotifier()..fetchUsers()),
         ChangeNotifierProvider(create: (_) => FiltersNotifier()),
         ChangeNotifierProvider(create: (_) => SearchQueryNotifier()),
-        ChangeNotifierProxyProvider2(
-          create: (BuildContext context) => AllUsersNotifier(context.read<FiltersNotifier>(), context.read<SearchQueryNotifier>())..fetchUsers(),
-          update: (BuildContext context, FiltersNotifier filtersNotifier, SearchQueryNotifier searchQueryNotifier, AllUsersNotifier? allUsersNotifier) {
-            return allUsersNotifier ?? AllUsersNotifier(filtersNotifier, searchQueryNotifier);
+        ChangeNotifierProxyProvider3(
+          create: (BuildContext context) => FilteredUsersNotifier(
+            allUsersNotifier: context.read<AllUsersNotifier>(),
+            filtersNotifier: context.read<FiltersNotifier>(),
+            searchQueryNotifier: context.read<SearchQueryNotifier>(),
+          ),
+          update: (
+            BuildContext context,
+            AllUsersNotifier allUsersNotifier,
+            FiltersNotifier filtersNotifier,
+            SearchQueryNotifier searchQueryNotifier,
+            FilteredUsersNotifier? filteredUsersNotifier,
+          ) {
+            return filteredUsersNotifier ??
+                FilteredUsersNotifier(
+                  allUsersNotifier: allUsersNotifier,
+                  filtersNotifier: filtersNotifier,
+                  searchQueryNotifier: searchQueryNotifier,
+                );
           },
         ),
       ],

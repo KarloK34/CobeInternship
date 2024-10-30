@@ -1,4 +1,4 @@
-import 'package:first_project/notifiers/all_users_notifier.dart';
+import 'package:first_project/notifiers/filtered_users_notifier.dart';
 import 'package:first_project/ui/user_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,7 @@ class UserTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final users = context.watch<AllUsersNotifier>().filterUsers();
+    final users = context.watch<FilteredUsersNotifier>().filteredUsers;
 
     return Expanded(
       child: ListView.builder(
