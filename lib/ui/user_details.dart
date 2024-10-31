@@ -42,7 +42,7 @@ class UserDetails extends StatelessWidget {
               ),
               const SizedBox(width: 20),
               Text(
-                user.isAbsent ? 'Unavailable' : 'Available',
+                user.currentLeaveType == null ? 'Available for work' : 'Unavailable',
                 style: TextStyles.regular15,
               )
             ],

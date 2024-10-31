@@ -1,19 +1,20 @@
 import 'package:first_project/enums/chip_type.dart';
 import 'package:first_project/enums/connection_status.dart';
 import 'package:first_project/enums/leave_request_status.dart';
+import 'package:first_project/notifiers/filters_notifier.dart';
 import 'package:first_project/utilities/app_colors.dart';
 import 'package:first_project/utilities/app_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyChip extends StatelessWidget {
   final ChipType chipType;
   final LeaveRequestStatus? requestStatus;
   final ConnectionStatus? connectionStatus;
   final String? label;
-  final Color? color;
   final double borderRadius;
 
-  const MyChip({super.key, required this.chipType, this.requestStatus, this.connectionStatus, this.label, this.color, this.borderRadius = 12.0});
+  const MyChip({super.key, required this.chipType, this.requestStatus, this.connectionStatus, this.label, this.borderRadius = 12.0});
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +36,12 @@ class MyChip extends StatelessWidget {
         borderColor = connectionStatus == ConnectionStatus.Online ? _getConnectionColor(connectionStatus) : AppColors.regularTextColor;
         break;
       case ChipType.regular:
+        final isSelected = context.select<FiltersNotifier, bool>(
+          (notifier) => notifier.selectedFilters.contains(label),
+        );
         chipLabel = label ?? 'Chip';
-        chipColor = color ?? Colors.white;
-        labelColor = borderColor = color == AppColors.green ? Colors.white : AppColors.regularTextColor;
+        chipColor = isSelected ? AppColors.green : AppColors.backgroundColor;
+        labelColor = borderColor = chipColor == AppColors.green ? Colors.white : AppColors.regularTextColor;
         break;
     }
 

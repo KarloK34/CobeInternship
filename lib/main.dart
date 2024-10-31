@@ -1,7 +1,9 @@
-import 'package:first_project/models/user.dart';
-import 'package:first_project/providers/user_provider.dart';
+import 'package:first_project/notifiers/all_users_notifier.dart';
+import 'package:first_project/notifiers/filtered_users_notifier.dart';
+import 'package:first_project/notifiers/filters_notifier.dart';
+import 'package:first_project/notifiers/search_query_notifier.dart';
+import 'package:first_project/routes/app_routes.dart';
 import 'package:first_project/screens/home_page.dart';
-import 'package:first_project/screens/public_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,21 +16,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => UserProvider(),
-      child: MaterialApp(
-        initialRoute: HomePage.routeName,
-        onGenerateRoute: (settings) {
-          if (settings.name == PublicProfilePage.routeName) {
-            final user = settings.arguments as User;
-            return MaterialPageRoute(
-              builder: (context) => PublicProfilePage(user: user),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AllUsersNotifier()..fetchUsers()),
+        ChangeNotifierProvider(create: (_) => FiltersNotifier()),
+        ChangeNotifierProvider(create: (_) => SearchQueryNotifier()),
+        ChangeNotifierProxyProvider3(
+          create: (BuildContext context) => FilteredUsersNotifier(),
+          update: (
+            BuildContext context,
+            AllUsersNotifier allUsersNotifier,
+            FiltersNotifier filtersNotifier,
+            SearchQueryNotifier searchQueryNotifier,
+            FilteredUsersNotifier? filteredUsersNotifier,
+          ) {
+            filteredUsersNotifier?.filterUsers(
+              allUsersNotifier.allUsers,
+              filtersNotifier.selectedFilters,
+              searchQueryNotifier.searchQuery,
             );
-          }
-          return MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          );
-        },
+            return filteredUsersNotifier!;
+          },
+        ),
+      ],
+      child: const MaterialApp(
+        initialRoute: HomePage.routeName,
+        onGenerateRoute: generateRoute,
       ),
     );
   }
