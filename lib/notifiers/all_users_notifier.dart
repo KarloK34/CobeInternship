@@ -30,6 +30,15 @@ final List<User> mockedUsers = [
     Role.Employee,
     AppImages.dummyProfile2,
     ConnectionStatus.Offline,
+    requests: [
+      LeaveRequest(
+        DateTime(2024, 10, 29),
+        DateTime(2024, 11, 9),
+        LeaveType.Vacation,
+        RequestVisibility.everyone,
+        'Going to Dubai',
+      ),
+    ],
   ),
 ];
 
