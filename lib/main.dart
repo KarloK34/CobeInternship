@@ -22,11 +22,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => FiltersNotifier()),
         ChangeNotifierProvider(create: (_) => SearchQueryNotifier()),
         ChangeNotifierProxyProvider3(
-          create: (BuildContext context) => FilteredUsersNotifier(
-            allUsersNotifier: context.read<AllUsersNotifier>(),
-            filtersNotifier: context.read<FiltersNotifier>(),
-            searchQueryNotifier: context.read<SearchQueryNotifier>(),
-          ),
+          create: (BuildContext context) => FilteredUsersNotifier(),
           update: (
             BuildContext context,
             AllUsersNotifier allUsersNotifier,
@@ -34,12 +30,12 @@ class MyApp extends StatelessWidget {
             SearchQueryNotifier searchQueryNotifier,
             FilteredUsersNotifier? filteredUsersNotifier,
           ) {
-            return filteredUsersNotifier ??
-                FilteredUsersNotifier(
-                  allUsersNotifier: allUsersNotifier,
-                  filtersNotifier: filtersNotifier,
-                  searchQueryNotifier: searchQueryNotifier,
-                );
+            filteredUsersNotifier?.filterUsers(
+              allUsersNotifier.allUsers,
+              filtersNotifier.selectedFilters,
+              searchQueryNotifier.searchQuery,
+            );
+            return filteredUsersNotifier!;
           },
         ),
       ],
