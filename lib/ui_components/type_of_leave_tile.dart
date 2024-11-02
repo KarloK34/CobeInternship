@@ -1,13 +1,13 @@
 import 'package:first_project/enums/chip_type.dart';
-import 'package:first_project/ui/my_chip.dart';
-import 'package:first_project/models/request.dart';
+import 'package:first_project/ui_components/my_chip.dart';
+import 'package:first_project/models/leave_request.dart';
 import 'package:first_project/utilities/app_colors.dart';
-import 'package:first_project/utilities/text_styles.dart';
+import 'package:first_project/utilities/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TypeOfLeaveTile extends StatelessWidget {
-  final Request request;
+  final LeaveRequest request;
   const TypeOfLeaveTile({
     super.key,
     required this.request,
@@ -30,11 +30,11 @@ class TypeOfLeaveTile extends StatelessWidget {
         children: [
           Text(
             request.type.name,
-            style: TextStyles.heading2,
+            style: AppTextStyles.heading2,
           ),
           Text(
             '${request.numberOfDays} days ・ $formattedStartDate - $formattedEndDate',
-            style: TextStyles.regular15,
+            style: AppTextStyles.regular15,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 16.0),
@@ -56,9 +56,7 @@ class TypeOfLeaveTile extends StatelessWidget {
                         backgroundColor: WidgetStatePropertyAll(AppColors.buttonSecond),
                       ),
                       onPressed: () {},
-                      icon: const Icon(
-                        Icons.arrow_forward,
-                      )),
+                      icon: const Icon(Icons.arrow_forward)),
                 ),
               ],
             ),

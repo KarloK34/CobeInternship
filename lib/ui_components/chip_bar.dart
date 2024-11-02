@@ -1,5 +1,5 @@
 import 'package:first_project/enums/chip_type.dart';
-import 'package:first_project/ui/my_chip.dart';
+import 'package:first_project/ui_components/my_chip.dart';
 import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
 

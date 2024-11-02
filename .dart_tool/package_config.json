@@ -56,6 +56,12 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "flutter_riverpod",
+      "rootUri": "file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/flutter_riverpod-2.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///Users/cobepraksa2/development/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -122,6 +128,12 @@
       "languageVersion": "2.16"
     },
     {
+      "name": "riverpod",
+      "rootUri": "file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/riverpod-2.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/cobepraksa2/development/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -138,6 +150,12 @@
       "rootUri": "file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/stack_trace-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "state_notifier",
+      "rootUri": "file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/state_notifier-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "stream_channel",
@@ -182,7 +200,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-10-26T09:24:00.048962Z",
+  "generated": "2024-10-31T22:22:52.343905Z",
   "generator": "pub",
   "generatorVersion": "3.5.3",
   "flutterRoot": "file:///Users/cobepraksa2/development/flutter",

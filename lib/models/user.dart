@@ -1,22 +1,34 @@
 import 'package:first_project/enums/connection_status.dart';
+import 'package:first_project/enums/leave_type.dart';
 import 'package:first_project/enums/role.dart';
-import 'package:flutter/material.dart';
+import 'package:first_project/models/leave_request.dart';
 
 class User {
   final String name;
   final String surname;
   final Role role;
-  Image profilePicture;
-  ConnectionStatus _status = ConnectionStatus.Offline;
+  final List<LeaveRequest> _requests = [];
+  String profilePicture;
+  ConnectionStatus status = ConnectionStatus.Offline;
+  LeaveType? currentLeaveType;
 
-  ConnectionStatus get status => _status;
-  set status(ConnectionStatus newStatus) {
-    _status = newStatus;
-  }
+  User(
+    this.name,
+    this.surname,
+    this.role,
+    this.profilePicture,
+    this.status,
+  );
 
   void toggleConnectionStatus() {
-    _status = _status == ConnectionStatus.Offline ? ConnectionStatus.Online : ConnectionStatus.Online;
+    status = status == ConnectionStatus.Offline ? ConnectionStatus.Online : ConnectionStatus.Online;
   }
 
-  User(this.name, this.surname, this.role, this.profilePicture, this._status);
+  void createRequest(LeaveRequest request) {
+    _requests.add(request);
+  }
+
+  List<LeaveRequest> get requests {
+    return _requests;
+  }
 }

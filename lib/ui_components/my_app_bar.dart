@@ -1,5 +1,6 @@
-import 'package:first_project/utilities/app_fonts.dart';
+import 'package:first_project/utilities/app_colors.dart';
 import 'package:first_project/utilities/app_images.dart';
+import 'package:first_project/utilities/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget {
@@ -23,17 +24,11 @@ class MyAppBar extends StatelessWidget {
               shape: BoxShape.circle,
             ),
           ),
-          const SizedBox(
-            width: 15,
-          ),
+          const SizedBox(width: 15),
           const Expanded(
             child: Text(
               'Home',
-              style: TextStyle(
-                  fontFamily: AppFonts.filsonPro,
-                  fontSize: 27,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xFF3D4766)),
+              style: AppTextStyles.heading,
             ),
           ),
           SizedBox(
@@ -47,13 +42,11 @@ class MyAppBar extends StatelessWidget {
               child: const Icon(
                 Icons.calendar_month,
                 size: 20.0,
-                color: Color(0xFF3D4766),
+                color: AppColors.labelColorLightThemePrimary,
               ),
             ),
           ),
-          const SizedBox(
-            width: 12,
-          ),
+          const SizedBox(width: 12),
           SizedBox(
             height: 44,
             width: 44,
@@ -65,7 +58,7 @@ class MyAppBar extends StatelessWidget {
               child: const Icon(
                 Icons.notifications_none_outlined,
                 size: 20.0,
-                color: Color(0xFF3D4766),
+                color: AppColors.labelColorLightThemePrimary,
               ),
             ),
           )
