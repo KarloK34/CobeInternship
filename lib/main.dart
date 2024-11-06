@@ -13,7 +13,6 @@ import 'package:first_project/models/leave_request.dart';
 import 'package:first_project/models/user.dart';
 import 'package:first_project/routes/app_routes.dart';
 import 'package:first_project/screens/splash_screen.dart';
-import 'package:first_project/utilities/app_colors.dart';
 import 'package:first_project/utilities/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,20 +42,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: const ColorScheme(
-            brightness: Brightness.light,
-            primary: AppColors.backroundColor,
-            onPrimary: AppColors.labelColorLightThemePrimary,
-            secondary: AppColors.orangeGradient2,
-            onSecondary: Colors.white,
-            error: Colors.red,
-            onError: Colors.white,
-            surface: AppColors.loginBackgroundColor,
-            onSurface: AppColors.orangeGradient2),
-      ),
+    return const MaterialApp(
       initialRoute: SplashScreen.routeName,
       onGenerateRoute: generateRoute,
     );
