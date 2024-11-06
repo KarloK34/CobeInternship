@@ -1,5 +1,5 @@
 import 'package:first_project/screens/login_screen.dart';
-import 'package:first_project/ui_components/logo.dart';
+import 'package:first_project/ui_components/shareable/logo.dart';
 import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -16,11 +16,18 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
-      Navigator.pushReplacementNamed(
-        context,
-        LoginScreen.routeName,
-      );
+    _navigateToLogin();
+  }
+
+  void _navigateToLogin() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(seconds: 1));
+      if (mounted) {
+        Navigator.pushReplacementNamed(
+          context,
+          LoginScreen.routeName,
+        );
+      }
     });
   }
 

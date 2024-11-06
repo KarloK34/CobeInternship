@@ -1,6 +1,6 @@
 import 'package:first_project/enums/chip_type.dart';
 import 'package:first_project/models/user.dart';
-import 'package:first_project/ui_components/my_chip.dart';
+import 'package:first_project/ui_components/shareable/my_chip.dart';
 import 'package:first_project/utilities/app_text_styles.dart';
 import 'package:flutter/material.dart';
 

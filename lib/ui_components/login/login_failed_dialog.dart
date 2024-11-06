@@ -37,7 +37,7 @@ class LoginFailedDialog extends ConsumerWidget {
                 )),
             onPressed: () {
               ref.read(emailNotifierProvider.notifier).updateEmail('');
-              ref.read(passwordProvider.notifier).state = '';
+              ref.read(passwordStateProvider.notifier).state = '';
               Navigator.pop(context);
             },
             child: const Text('Okay'),

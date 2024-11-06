@@ -1,18 +1,29 @@
 import 'package:first_project/enums/connection_status.dart';
 import 'package:first_project/enums/leave_type.dart';
 import 'package:first_project/enums/role.dart';
-import 'package:first_project/models/leave_request.dart';
+import 'package:hive/hive.dart';
 
+part 'user.g.dart';
+
+@HiveType(typeId: 1)
 class User {
+  @HiveField(0)
+  final int id;
+  @HiveField(1)
   final String name;
+  @HiveField(2)
   final String surname;
+  @HiveField(3)
   final Role role;
-  final List<LeaveRequest> _requests = [];
+  @HiveField(4)
   String profilePicture;
+  @HiveField(5)
   ConnectionStatus status = ConnectionStatus.Offline;
+  @HiveField(6)
   LeaveType? currentLeaveType;
 
   User(
+    this.id,
     this.name,
     this.surname,
     this.role,
@@ -22,13 +33,5 @@ class User {
 
   void toggleConnectionStatus() {
     status = status == ConnectionStatus.Offline ? ConnectionStatus.Online : ConnectionStatus.Online;
-  }
-
-  void createRequest(LeaveRequest request) {
-    _requests.add(request);
-  }
-
-  List<LeaveRequest> get requests {
-    return _requests;
   }
 }

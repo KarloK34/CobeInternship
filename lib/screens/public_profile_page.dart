@@ -1,9 +1,11 @@
+import 'package:first_project/models/leave_request.dart';
 import 'package:first_project/models/user.dart';
-import 'package:first_project/ui_components/add_button.dart';
+import 'package:first_project/ui_components/shareable/add_button.dart';
 import 'package:first_project/ui_components/type_of_leave_tile.dart';
 import 'package:first_project/ui_components/user_details.dart';
 import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class PublicProfilePage extends StatelessWidget {
   static const routeName = '/publicProfile';
@@ -13,6 +15,12 @@ class PublicProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var requestBox = Hive.box<LeaveRequest>('requestBox');
+    var userRequests = requestBox.values
+        .where(
+          (element) => element.userId == user.id,
+        )
+        .toList();
     return Scaffold(
       floatingActionButton: const AddButton(),
       backgroundColor: AppColors.backroundColor,
@@ -41,11 +49,12 @@ class PublicProfilePage extends StatelessWidget {
                 const SizedBox(height: 80),
                 Expanded(
                   child: ListView.builder(
-                      itemCount: user.requests.length,
-                      itemBuilder: (context, index) {
-                        return TypeOfLeaveTile(request: user.requests[index]);
-                      }),
-                )
+                    itemCount: userRequests.length,
+                    itemBuilder: (context, index) {
+                      return TypeOfLeaveTile(request: userRequests[index]);
+                    },
+                  ),
+                ),
               ],
             ),
             Positioned(
