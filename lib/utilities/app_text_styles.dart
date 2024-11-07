@@ -29,4 +29,8 @@ abstract class AppTextStyles {
     fontSize: 15,
     fontWeight: FontWeight.w400,
   );
+  static const TextStyle labelSmall = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.w400,
+  );
 }

@@ -1,17 +1,16 @@
-import 'package:first_project/models/user.dart';
+import 'package:first_project/providers/filtered_users_notifier_provider.dart';
 import 'package:first_project/ui_components/user_container.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserTiles extends StatelessWidget {
+class UserTiles extends ConsumerWidget {
   const UserTiles({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    var userBox = Hive.box<User>('userBox');
-    var users = userBox.values.toList();
+  Widget build(BuildContext context, WidgetRef ref) {
+    var users = ref.watch(filteredUsersNotifierProvider);
     return Expanded(
       child: ListView.builder(
         itemCount: users.length,

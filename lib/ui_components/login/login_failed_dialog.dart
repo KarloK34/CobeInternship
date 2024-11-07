@@ -1,5 +1,5 @@
-import 'package:first_project/providers/email_provider.dart';
-import 'package:first_project/providers/passwords_provider.dart';
+import 'package:first_project/providers/email_notifier_provider.dart';
+import 'package:first_project/providers/password_state_provider.dart';
 import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -57,7 +57,7 @@ List<User> createUsers() {
   if (userBox.isEmpty) {
     final users = [
       User(1, 'Karlo', 'Kraml', Role.Student, AppImages.dummyProfile, ConnectionStatus.Online),
-      User(2, 'Stela', 'Kraml', Role.Student, AppImages.dummyProfile, ConnectionStatus.Online)
+      User(2, 'Stela', 'Kraml', Role.Student, AppImages.dummyProfile2, ConnectionStatus.Offline)
     ];
 
     for (var user in users) {

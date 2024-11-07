@@ -1,8 +1,8 @@
 import 'package:first_project/enums/login_status.dart';
 import 'package:first_project/main.dart';
-import 'package:first_project/providers/email_provider.dart';
+import 'package:first_project/providers/email_notifier_provider.dart';
 import 'package:first_project/providers/login_status_notifier_provider.dart';
-import 'package:first_project/providers/passwords_provider.dart';
+import 'package:first_project/providers/password_state_provider.dart';
 import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -59,9 +59,7 @@ class LoginButton extends ConsumerWidget {
               )
             : Text(
                 'Login',
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.white),
               ),
       ),
     );

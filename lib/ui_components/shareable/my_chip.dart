@@ -1,22 +1,23 @@
 import 'package:first_project/enums/chip_type.dart';
 import 'package:first_project/enums/connection_status.dart';
 import 'package:first_project/enums/leave_request_status.dart';
+import 'package:first_project/providers/filters_notifier_provider.dart';
 import 'package:first_project/utilities/app_colors.dart';
-import 'package:first_project/utilities/app_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyChip extends StatelessWidget {
+class MyChip extends ConsumerWidget {
   final ChipType chipType;
   final LeaveRequestStatus? requestStatus;
   final ConnectionStatus? connectionStatus;
   final String? label;
-  final Color? color;
   final double borderRadius;
 
-  const MyChip({super.key, required this.chipType, this.requestStatus, this.connectionStatus, this.label, this.color, this.borderRadius = 12.0});
+  const MyChip({super.key, required this.chipType, this.requestStatus, this.connectionStatus, this.label, this.borderRadius = 12.0});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(filtersNotifierProvider);
     String chipLabel;
     Color chipColor;
     Color labelColor;
@@ -36,16 +37,15 @@ class MyChip extends StatelessWidget {
         break;
       case ChipType.regular:
         chipLabel = label ?? 'Chip';
-        chipColor = color ?? Colors.white;
-        labelColor = borderColor = color == AppColors.green ? Colors.white : AppColors.regularTextColor;
+        chipColor = ref.read(filtersNotifierProvider.notifier).isSelected(chipLabel) ? AppColors.green : AppColors.backgroundColor;
+        labelColor = borderColor = chipColor == AppColors.green ? Colors.white : AppColors.regularTextColor;
         break;
     }
 
     return Chip(
-      label: Text(chipLabel),
-      labelStyle: TextStyle(
-        fontFamily: AppFonts.filsonPro,
-        color: labelColor,
+      label: Text(
+        chipLabel,
+        style: Theme.of(context).textTheme.labelSmall!.copyWith(color: labelColor),
       ),
       backgroundColor: chipColor,
       shape: RoundedRectangleBorder(
