@@ -23,7 +23,7 @@ class PublicProfilePage extends StatelessWidget {
         .toList();
     return Scaffold(
       floatingActionButton: const AddButton(),
-      backgroundColor: AppColors.backroundColor,
+      backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: Stack(
           children: [

@@ -1,7 +1,6 @@
 import 'package:first_project/ui_components/login/login_form.dart';
 import 'package:first_project/ui_components/shareable/logo.dart';
 import 'package:first_project/utilities/app_colors.dart';
-import 'package:first_project/utilities/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -20,9 +19,9 @@ class LoginScreen extends StatelessWidget {
           const SizedBox(height: 60),
           LoginForm(),
           const SizedBox(height: 22),
-          const Text(
+          Text(
             'Reset your password?',
-            style: AppTextStyles.orange15,
+            style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.orangeGradient2),
           ),
         ],
       ),

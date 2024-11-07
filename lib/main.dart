@@ -14,6 +14,7 @@ import 'package:first_project/models/user.dart';
 import 'package:first_project/routes/app_routes.dart';
 import 'package:first_project/screens/splash_screen.dart';
 import 'package:first_project/utilities/app_images.dart';
+import 'package:first_project/utilities/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: AppTheme.lightTheme,
       initialRoute: SplashScreen.routeName,
       onGenerateRoute: generateRoute,
     );

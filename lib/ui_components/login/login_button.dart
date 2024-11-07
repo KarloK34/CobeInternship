@@ -4,7 +4,6 @@ import 'package:first_project/providers/email_provider.dart';
 import 'package:first_project/providers/login_status_notifier_provider.dart';
 import 'package:first_project/providers/passwords_provider.dart';
 import 'package:first_project/utilities/app_colors.dart';
-import 'package:first_project/utilities/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -58,9 +57,11 @@ class LoginButton extends ConsumerWidget {
             ? const CircularProgressIndicator(
                 color: Colors.white,
               )
-            : const Text(
+            : Text(
                 'Login',
-                style: AppTextStyles.title3Regular,
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: Colors.white,
+                    ),
               ),
       ),
     );

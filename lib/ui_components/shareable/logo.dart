@@ -1,5 +1,4 @@
 import 'package:first_project/utilities/app_images.dart';
-import 'package:first_project/utilities/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class Logo extends StatelessWidget {
@@ -14,9 +13,12 @@ class Logo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(AppImages.splashLogo),
-          const Text(
+          Text(
             'Hive',
-            style: AppTextStyles.heading,
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: Theme.of(context).primaryColor,
+                ),
           ),
         ],
       ),

@@ -2,7 +2,6 @@ import 'package:first_project/enums/connection_status.dart';
 import 'package:first_project/models/user.dart';
 import 'package:first_project/screens/public_profile_page.dart';
 import 'package:first_project/utilities/app_colors.dart';
-import 'package:first_project/utilities/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class UserContainer extends StatelessWidget {
@@ -60,11 +59,14 @@ class UserContainer extends StatelessWidget {
               children: [
                 Text(
                   '${user.name} ${user.surname}',
-                  style: AppTextStyles.heading2,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                const Text(
+                Text(
                   'Text here',
-                  style: AppTextStyles.regular13,
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                        fontSize: 13.0,
+                        color: AppColors.regularTextColor,
+                      ),
                 ),
               ],
             ),

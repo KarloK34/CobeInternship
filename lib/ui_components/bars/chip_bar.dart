@@ -40,7 +40,7 @@ class _ChipBarState extends State<ChipBar> {
                 child: MyChip(
                   chipType: ChipType.regular,
                   label: labelName,
-                  color: chipLabels[labelName] ?? false ? AppColors.green : AppColors.backroundColor,
+                  color: chipLabels[labelName] ?? false ? AppColors.green : AppColors.backgroundColor,
                   borderRadius: 20,
                 ),
               ),

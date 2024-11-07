@@ -1,7 +1,6 @@
 import 'package:first_project/providers/email_provider.dart';
 import 'package:first_project/providers/passwords_provider.dart';
 import 'package:first_project/utilities/app_colors.dart';
-import 'package:first_project/utilities/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,15 +13,17 @@ class LoginFailedDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AlertDialog(
       backgroundColor: Colors.white,
-      title: const Center(
+      title: Center(
         child: Text(
           'Login Failed',
-          style: AppTextStyles.title2Bold,
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
         ),
       ),
-      content: const Text(
+      content: Text(
         'Invalid email or password. Please try again.',
-        style: AppTextStyles.dialogText,
+        style: Theme.of(context).textTheme.bodyMedium,
         textAlign: TextAlign.center,
       ),
       actions: [

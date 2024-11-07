@@ -62,7 +62,7 @@ class MyChip extends StatelessWidget {
       case LeaveRequestStatus.Pending:
         return AppColors.yellow;
       case LeaveRequestStatus.Rejected:
-        return AppColors.red;
+        return AppColors.orangeGradient2;
       default:
         return Colors.grey;
     }

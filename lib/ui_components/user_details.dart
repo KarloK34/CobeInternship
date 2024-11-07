@@ -1,7 +1,7 @@
 import 'package:first_project/enums/chip_type.dart';
 import 'package:first_project/models/user.dart';
 import 'package:first_project/ui_components/shareable/my_chip.dart';
-import 'package:first_project/utilities/app_text_styles.dart';
+import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class UserDetails extends StatelessWidget {
@@ -27,11 +27,15 @@ class UserDetails extends StatelessWidget {
         children: [
           Text(
             '${user.name} ${user.surname}',
-            style: AppTextStyles.heading,
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
           ),
           Text(
             'Role ・ ${user.role.name}',
-            style: AppTextStyles.regular15,
+            style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                  color: AppColors.regularTextColor,
+                ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +47,9 @@ class UserDetails extends StatelessWidget {
               const SizedBox(width: 20),
               Text(
                 user.currentLeaveType == null ? 'Available for work' : 'Unavailable',
-                style: AppTextStyles.regular15,
+                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                      color: AppColors.regularTextColor,
+                    ),
               )
             ],
           ),

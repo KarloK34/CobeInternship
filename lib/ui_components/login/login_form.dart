@@ -16,9 +16,20 @@ class LoginForm extends StatelessWidget {
       child: FormBuilder(
         key: _formKey,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              'Email',
+              style: Theme.of(context).textTheme.labelMedium,
+            ),
+            const SizedBox(height: 7),
             const EmailTextField(),
             const SizedBox(height: 17),
+            Text(
+              'Password',
+              style: Theme.of(context).textTheme.labelMedium,
+            ),
+            const SizedBox(height: 7),
             const PasswordTextField(),
             const SizedBox(height: 28),
             LoginButton(_formKey),

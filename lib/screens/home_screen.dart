@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return const Scaffold(
       floatingActionButton: AddButton(),
-      backgroundColor: AppColors.backroundColor,
+      backgroundColor: AppColors.backgroundColor,
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: SafeArea(

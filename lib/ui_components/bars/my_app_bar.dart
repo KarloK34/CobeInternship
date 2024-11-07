@@ -1,6 +1,5 @@
 import 'package:first_project/utilities/app_colors.dart';
 import 'package:first_project/utilities/app_images.dart';
-import 'package:first_project/utilities/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget {
@@ -25,10 +24,13 @@ class MyAppBar extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 15),
-          const Expanded(
+          Expanded(
             child: Text(
               'Home',
-              style: AppTextStyles.heading,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w700,
+                  ),
             ),
           ),
           SizedBox(
