@@ -1,1 +1,1 @@
-enum LeaveRequestStatus { Approved, Pending, Rejected }
+enum LeaveRequestStatus { approved, pending, rejected }

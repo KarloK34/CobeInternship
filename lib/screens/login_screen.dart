@@ -1,6 +1,7 @@
+import 'package:first_project/extensions/context_extensions/colors.dart';
+import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/ui_components/login/login_form.dart';
 import 'package:first_project/ui_components/shareable/logo.dart';
-import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.loginBackgroundColor,
+      backgroundColor: context.backgroundBright,
       body: Column(
         children: [
           const SizedBox(height: 140),
@@ -21,7 +22,7 @@ class LoginScreen extends StatelessWidget {
           const SizedBox(height: 22),
           Text(
             'Reset your password?',
-            style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.orangeGradient2),
+            style: context.labelMedium!.copyWith(color: context.secondary),
           ),
         ],
       ),

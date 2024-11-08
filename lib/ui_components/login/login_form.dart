@@ -1,3 +1,4 @@
+import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/ui_components/login/email_text_field.dart';
 import 'package:first_project/ui_components/login/login_button.dart';
 import 'package:first_project/ui_components/login/password_text_field.dart';
@@ -20,14 +21,14 @@ class LoginForm extends StatelessWidget {
           children: [
             Text(
               'Email',
-              style: Theme.of(context).textTheme.labelMedium,
+              style: context.labelMedium,
             ),
             const SizedBox(height: 7),
             const EmailTextField(),
             const SizedBox(height: 17),
             Text(
               'Password',
-              style: Theme.of(context).textTheme.labelMedium,
+              style: context.labelMedium,
             ),
             const SizedBox(height: 7),
             const PasswordTextField(),

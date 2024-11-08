@@ -1,3 +1,5 @@
+import 'package:first_project/extensions/context_extensions/colors.dart';
+import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/utilities/app_images.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +17,7 @@ class Logo extends StatelessWidget {
           Image.asset(AppImages.splashLogo),
           Text(
             'Hive',
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: Theme.of(context).primaryColor,
-                ),
+            style: context.titleLargeBold!.copyWith(color: context.primaryColor),
           ),
         ],
       ),

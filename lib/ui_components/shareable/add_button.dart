@@ -1,4 +1,4 @@
-import 'package:first_project/utilities/app_colors.dart';
+import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:flutter/material.dart';
 
 class AddButton extends StatelessWidget {
@@ -13,7 +13,7 @@ class AddButton extends StatelessWidget {
       height: 54,
       width: 54,
       child: FloatingActionButton(
-        backgroundColor: AppColors.orangeGradient2,
+        backgroundColor: context.secondary,
         foregroundColor: Colors.white,
         shape: const CircleBorder(),
         onPressed: () {

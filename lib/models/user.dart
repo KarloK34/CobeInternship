@@ -18,7 +18,7 @@ class User {
   @HiveField(4)
   String profilePicture;
   @HiveField(5)
-  ConnectionStatus status = ConnectionStatus.Offline;
+  ConnectionStatus status = ConnectionStatus.offline;
   @HiveField(6)
   LeaveType? currentLeaveType;
 
@@ -32,6 +32,6 @@ class User {
   );
 
   void toggleConnectionStatus() {
-    status = status == ConnectionStatus.Offline ? ConnectionStatus.Online : ConnectionStatus.Online;
+    status = status == ConnectionStatus.offline ? ConnectionStatus.online : ConnectionStatus.online;
   }
 }

@@ -1,6 +1,8 @@
-import 'package:first_project/providers/email_notifier_provider.dart';
+import 'package:first_project/extensions/context_extensions/colors.dart';
+import 'package:first_project/extensions/context_extensions/text_styles.dart';
+import 'package:first_project/login_state.dart';
+import 'package:first_project/providers/email_state_provider.dart';
 import 'package:first_project/providers/password_state_provider.dart';
-import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,29 +17,27 @@ class LoginFailedDialog extends ConsumerWidget {
       backgroundColor: Colors.white,
       title: Center(
         child: Text(
-          'Login Failed',
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
+          ErrorState.title,
+          style: context.titleMediumBold,
         ),
       ),
       content: Text(
-        'Invalid email or password. Please try again.',
-        style: Theme.of(context).textTheme.bodyMedium,
+        ErrorState.message,
+        style: context.bodyMedium,
         textAlign: TextAlign.center,
       ),
       actions: [
         Center(
           child: TextButton(
             style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: AppColors.orangeGradient2),
-                foregroundColor: AppColors.orangeGradient2,
+                side: BorderSide(color: context.secondary),
+                foregroundColor: context.secondary,
                 backgroundColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 )),
             onPressed: () {
-              ref.read(emailNotifierProvider.notifier).updateEmail('');
+              ref.read(emailStateProvider.notifier).state = '';
               ref.read(passwordStateProvider.notifier).state = '';
               Navigator.pop(context);
             },

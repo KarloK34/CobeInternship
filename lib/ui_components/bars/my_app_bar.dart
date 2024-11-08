@@ -1,4 +1,5 @@
-import 'package:first_project/utilities/app_colors.dart';
+import 'package:first_project/extensions/context_extensions/colors.dart';
+import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/utilities/app_images.dart';
 import 'package:flutter/material.dart';
 
@@ -27,10 +28,7 @@ class MyAppBar extends StatelessWidget {
           Expanded(
             child: Text(
               'Home',
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w700,
-                  ),
+              style: context.titleLargeBold!.copyWith(color: context.primary),
             ),
           ),
           SizedBox(
@@ -41,10 +39,10 @@ class MyAppBar extends StatelessWidget {
               elevation: 2.0,
               fillColor: Colors.white,
               shape: const CircleBorder(),
-              child: const Icon(
+              child: Icon(
                 Icons.calendar_month,
                 size: 20.0,
-                color: AppColors.labelColorLightThemePrimary,
+                color: context.primary,
               ),
             ),
           ),
@@ -57,10 +55,10 @@ class MyAppBar extends StatelessWidget {
               elevation: 2.0,
               fillColor: Colors.white,
               shape: const CircleBorder(),
-              child: const Icon(
+              child: Icon(
                 Icons.notifications_none_outlined,
                 size: 20.0,
-                color: AppColors.labelColorLightThemePrimary,
+                color: context.primary,
               ),
             ),
           )

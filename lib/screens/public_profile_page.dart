@@ -1,29 +1,24 @@
-import 'package:first_project/models/leave_request.dart';
+import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/models/user.dart';
+import 'package:first_project/providers/user_requests_notifier_provider.dart';
 import 'package:first_project/ui_components/shareable/add_button.dart';
 import 'package:first_project/ui_components/type_of_leave_tile.dart';
 import 'package:first_project/ui_components/user_details.dart';
-import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PublicProfilePage extends StatelessWidget {
+class PublicProfilePage extends ConsumerWidget {
   static const routeName = '/publicProfile';
 
   final User user;
   const PublicProfilePage({super.key, required this.user});
 
   @override
-  Widget build(BuildContext context) {
-    var requestBox = Hive.box<LeaveRequest>('requestBox');
-    var userRequests = requestBox.values
-        .where(
-          (element) => element.userId == user.id,
-        )
-        .toList();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userRequests = ref.watch(userRequestsNotifierProvider(user.id));
     return Scaffold(
       floatingActionButton: const AddButton(),
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: context.background,
       body: SafeArea(
         child: Stack(
           children: [
@@ -47,14 +42,15 @@ class PublicProfilePage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 80),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: userRequests.length,
-                    itemBuilder: (context, index) {
-                      return TypeOfLeaveTile(request: userRequests[index]);
-                    },
+                if (userRequests.hasValue)
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: userRequests.value!.length,
+                      itemBuilder: (context, index) {
+                        return TypeOfLeaveTile(request: userRequests.value![index]);
+                      },
+                    ),
                   ),
-                ),
               ],
             ),
             Positioned(

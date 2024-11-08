@@ -1,6 +1,6 @@
-import 'package:first_project/providers/filtered_users_notifier_provider.dart';
+import 'package:first_project/extensions/context_extensions/colors.dart';
+import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/providers/search_query_notifier_provider.dart';
-import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,7 +24,6 @@ class _MySearchBarState extends ConsumerState<MySearchBar> {
     _controller.addListener(() {
       final query = _controller.text;
       ref.read(searchQueryNotifierProvider.notifier).updateSearchQuery(query);
-      ref.read(filteredUsersNotifierProvider.notifier).filterUsers();
     });
   }
 
@@ -41,17 +40,17 @@ class _MySearchBarState extends ConsumerState<MySearchBar> {
       child: SearchBar(
         controller: _controller,
         elevation: const WidgetStatePropertyAll(0),
-        leading: const SizedBox(
+        leading: SizedBox(
           height: 20,
           width: 20,
           child: Icon(
             Icons.search,
-            color: AppColors.regularTextColor,
+            color: context.onBackgroundVariant,
           ),
         ),
         hintText: 'Search...',
         hintStyle: WidgetStatePropertyAll(
-          Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColors.regularTextColor),
+          context.labelMedium!.copyWith(color: context.onBackgroundVariant),
         ),
         backgroundColor: const WidgetStatePropertyAll(Colors.white),
         shape: WidgetStatePropertyAll(

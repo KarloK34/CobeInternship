@@ -20,10 +20,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final appDocumentDirectory = await getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDirectory.path);
+void registerHiveAdapters() {
   Hive.registerAdapter(UserAdapter());
   Hive.registerAdapter(LeaveRequestAdapter());
   Hive.registerAdapter(LeaveTypeAdapter());
@@ -31,6 +28,13 @@ void main() async {
   Hive.registerAdapter(LeaveRequestStatusAdapter());
   Hive.registerAdapter(RoleAdapter());
   Hive.registerAdapter(ConnectionStatusAdapter());
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final appDocumentDirectory = await getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDirectory.path);
+  registerHiveAdapters();
   await Hive.openBox<User>('userBox');
   await Hive.openBox<LeaveRequest>('requestBox');
   createUsers();
@@ -56,8 +60,8 @@ List<User> createUsers() {
 
   if (userBox.isEmpty) {
     final users = [
-      User(1, 'Karlo', 'Kraml', Role.Student, AppImages.dummyProfile, ConnectionStatus.Online),
-      User(2, 'Stela', 'Kraml', Role.Student, AppImages.dummyProfile2, ConnectionStatus.Offline)
+      User(1, 'Karlo', 'Kraml', Role.student, AppImages.dummyProfile, ConnectionStatus.online),
+      User(2, 'Stela', 'Kraml', Role.student, AppImages.dummyProfile2, ConnectionStatus.offline)
     ];
 
     for (var user in users) {
@@ -90,8 +94,9 @@ void createRequests() {
     User user2 = userBox.values.last;
 
     final requests = [
-      LeaveRequest(user1.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.Sick, RequestVisibility.everyone, "Flu", LeaveRequestStatus.Pending),
-      LeaveRequest(user2.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.Sick, RequestVisibility.everyone, "Flu", LeaveRequestStatus.Pending),
+      LeaveRequest(user1.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.sick, RequestVisibility.everyone, "Flu", LeaveRequestStatus.pending),
+      LeaveRequest(
+          user2.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.vacation, RequestVisibility.everyone, "Vienna", LeaveRequestStatus.pending),
     ];
 
     for (var request in requests) {

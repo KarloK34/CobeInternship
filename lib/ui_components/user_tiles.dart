@@ -1,4 +1,4 @@
-import 'package:first_project/providers/filtered_users_notifier_provider.dart';
+import 'package:first_project/providers/filtered_users_provider.dart';
 import 'package:first_project/ui_components/user_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +10,7 @@ class UserTiles extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var users = ref.watch(filteredUsersNotifierProvider);
+    var users = ref.watch(filteredUsersProvider);
     return Expanded(
       child: ListView.builder(
         itemCount: users.length,

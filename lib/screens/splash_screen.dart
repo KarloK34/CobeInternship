@@ -1,6 +1,6 @@
+import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/screens/login_screen.dart';
 import 'package:first_project/ui_components/shareable/logo.dart';
-import 'package:first_project/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -33,9 +33,9 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: AppColors.loginBackgroundColor,
-      body: Logo(),
+    return Scaffold(
+      backgroundColor: context.backgroundBright,
+      body: const Logo(),
     );
   }
 }
