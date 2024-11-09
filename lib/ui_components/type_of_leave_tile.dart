@@ -1,13 +1,14 @@
 import 'package:first_project/enums/chip_type.dart';
-import 'package:first_project/ui/my_chip.dart';
-import 'package:first_project/models/request.dart';
-import 'package:first_project/utilities/app_colors.dart';
-import 'package:first_project/utilities/text_styles.dart';
+import 'package:first_project/extensions/context_extensions/colors.dart';
+import 'package:first_project/extensions/context_extensions/text_styles.dart';
+import 'package:first_project/extensions/string_extensions.dart';
+import 'package:first_project/ui_components/shareable/my_chip.dart';
+import 'package:first_project/models/leave_request.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TypeOfLeaveTile extends StatelessWidget {
-  final Request request;
+  final LeaveRequest request;
   const TypeOfLeaveTile({
     super.key,
     required this.request,
@@ -29,12 +30,14 @@ class TypeOfLeaveTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            request.type.name,
-            style: TextStyles.heading2,
+            request.type.name.capitalize(),
+            style: context.bodyLarge,
           ),
           Text(
             '${request.numberOfDays} days ・ $formattedStartDate - $formattedEndDate',
-            style: TextStyles.regular15,
+            style: context.labelMedium!.copyWith(
+              color: context.onBackgroundVariant,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 16.0),
@@ -47,18 +50,16 @@ class TypeOfLeaveTile extends StatelessWidget {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    color: AppColors.buttonSecond,
+                    color: context.backgroundDim,
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: IconButton(
-                      color: AppColors.labelColorLightThemePrimary,
-                      style: const ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(AppColors.buttonSecond),
+                      color: context.primary,
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(context.backgroundDim),
                       ),
                       onPressed: () {},
-                      icon: const Icon(
-                        Icons.arrow_forward,
-                      )),
+                      icon: const Icon(Icons.arrow_forward)),
                 ),
               ],
             ),

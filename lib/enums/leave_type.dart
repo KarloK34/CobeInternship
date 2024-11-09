@@ -1,1 +1,1 @@
-enum LeaveType { Parental, Sick, Vacation }
+enum LeaveType { parental, sick, vacation }

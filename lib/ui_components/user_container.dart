@@ -1,8 +1,8 @@
 import 'package:first_project/enums/connection_status.dart';
+import 'package:first_project/extensions/context_extensions/colors.dart';
+import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/models/user.dart';
 import 'package:first_project/screens/public_profile_page.dart';
-import 'package:first_project/utilities/app_colors.dart';
-import 'package:first_project/utilities/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class UserContainer extends StatelessWidget {
@@ -11,26 +11,21 @@ class UserContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Image profilePicture = user.profilePicture;
-
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PublicProfilePage(user: user),
-          )),
+      onTap: () => Navigator.pushNamed(
+        context,
+        PublicProfilePage.routeName,
+        arguments: user,
+      ),
       child: Container(
         height: 96,
-        padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           children: [
-            const SizedBox(
-              width: 16,
-            ),
+            const SizedBox(width: 16),
             Stack(
               alignment: Alignment.topRight,
               children: [
@@ -39,39 +34,40 @@ class UserContainer extends StatelessWidget {
                   width: 56.0,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: profilePicture.image,
+                      image: AssetImage(user.profilePicture),
                       fit: BoxFit.fitWidth,
                     ),
                     shape: BoxShape.circle,
                   ),
                 ),
-                if (user.status == ConnectionStatus.Online)
+                if (user.status == ConnectionStatus.online)
                   Container(
                     height: 12,
                     width: 12,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: AppColors.green,
+                        color: context.tertiary,
                         border: Border.all(
                           color: Colors.white,
                         )),
                   )
               ],
             ),
-            const SizedBox(
-              width: 20,
-            ),
+            const SizedBox(width: 20),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   '${user.name} ${user.surname}',
-                  style: TextStyles.heading2,
+                  style: context.bodyLarge,
                 ),
-                const Text(
+                Text(
                   'Text here',
-                  style: TextStyles.regular13,
+                  style: context.labelMedium!.copyWith(
+                        fontSize: 13.0,
+                        color: context.onBackgroundVariant,
+                      ),
                 ),
               ],
             ),
