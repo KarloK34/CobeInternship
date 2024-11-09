@@ -1,8 +1,6 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/login_state.dart';
-import 'package:first_project/providers/email_state_provider.dart';
-import 'package:first_project/providers/password_state_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,8 +35,6 @@ class LoginFailedDialog extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(8),
                 )),
             onPressed: () {
-              ref.read(emailStateProvider.notifier).state = '';
-              ref.read(passwordStateProvider.notifier).state = '';
               Navigator.pop(context);
             },
             child: const Text('Okay'),

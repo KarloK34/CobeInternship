@@ -10,8 +10,7 @@ class ChipBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(selectedFiltersNotifierProvider);
-    final chipLabels = ref.watch(chipLabelsProvider);
+    final chipLabels = ref.read(chipLabelsProvider);
     return SizedBox(
       height: 48,
       child: ListView.builder(

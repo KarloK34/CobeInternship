@@ -36,11 +36,10 @@ class LoginStateNotifier extends Notifier<LoginState> {
 
     if (userAccountExists) {
       setStatus(const SuccessState());
-    } else {
-      setStatus(const ErrorState());
-      formKey.currentState!.reset();
-      setStatus(const InitialState());
+      return;
     }
+    setStatus(const ErrorState());
+    setStatus(const InitialState());
   }
 
   void setStatus(LoginState loginState) {
