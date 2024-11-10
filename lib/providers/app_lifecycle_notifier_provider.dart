@@ -1,3 +1,4 @@
+import 'package:first_project/providers/user_notifier_provider.dart';
 import 'package:first_project/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +17,7 @@ class AppLifecycleNotifier extends Notifier<void> {
 
   void onAppResumed(BuildContext context) {
     if (_markTime != null && DateTime.now().difference(_markTime!) >= const Duration(minutes: 1)) {
+      ref.read(userStateProvider.notifier).state = null;
       Navigator.pushReplacementNamed(context, LoginScreen.routeName);
     }
   }

@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 extension BuildContextEntension<T> on BuildContext {
   Color get primaryColor => Theme.of(this).primaryColor;
 
+  Color get primaryColorDark => Theme.of(this).primaryColorDark;
+
+  Color get primaryContainer => Theme.of(this).colorScheme.primaryContainer;
+
   Color get primary => Theme.of(this).colorScheme.primary;
 
   Color get onPrimary => Theme.of(this).colorScheme.onPrimary;
@@ -19,6 +23,8 @@ extension BuildContextEntension<T> on BuildContext {
 
   Color get onError => Theme.of(this).colorScheme.onError;
 
+  Color get errorContainer => Theme.of(this).colorScheme.errorContainer;
+
   Color get background => Theme.of(this).colorScheme.surface;
 
   Color get backgroundBright => Theme.of(this).colorScheme.surfaceBright;
@@ -30,4 +36,8 @@ extension BuildContextEntension<T> on BuildContext {
   Color get onBackgroundVariant => Theme.of(this).colorScheme.onSurfaceVariant;
 
   Color get tertiary => Theme.of(this).colorScheme.tertiary;
+
+  Color get tertiaryContainer => Theme.of(this).colorScheme.tertiaryContainer;
+
+  Color get transparent => Theme.of(this).colorScheme.inverseSurface;
 }
