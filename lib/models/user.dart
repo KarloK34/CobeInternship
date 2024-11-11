@@ -21,17 +21,14 @@ class User {
   ConnectionStatus status = ConnectionStatus.offline;
   @HiveField(6)
   LeaveType? currentLeaveType;
+  @HiveField(7)
+  final bool? _isAdmin;
 
-  User(
-    this.id,
-    this.name,
-    this.surname,
-    this.role,
-    this.profilePicture,
-    this.status,
-  );
+  User(this.id, this.name, this.surname, this.role, this.profilePicture, this.status, [this._isAdmin = false]);
 
   void toggleConnectionStatus() {
     status = status == ConnectionStatus.offline ? ConnectionStatus.online : ConnectionStatus.online;
   }
+
+  bool get isAdmin => _isAdmin ?? false;
 }

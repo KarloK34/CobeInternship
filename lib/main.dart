@@ -35,8 +35,9 @@ void main() async {
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   registerHiveAdapters();
-  await Hive.openBox<User>('userBox');
+  final userBox = await Hive.openBox<User>('userBox');
   await Hive.openBox<LeaveRequest>('requestBox');
+  await userBox.clear();
   createUsers();
   createRequests();
   runApp(const ProviderScope(child: MyApp()));
@@ -60,8 +61,8 @@ List<User> createUsers() {
 
   if (userBox.isEmpty) {
     final users = [
-      User(1, 'Karlo', 'Kraml', Role.student, AppImages.dummyProfile, ConnectionStatus.online),
-      User(2, 'Stela', 'Kraml', Role.student, AppImages.dummyProfile2, ConnectionStatus.offline)
+      User(1, 'Karlo', 'Kraml', Role.student, AppImages.dummyProfile, ConnectionStatus.online, true),
+      User(2, 'Stela', 'Kraml', Role.student, AppImages.dummyProfile2, ConnectionStatus.offline),
     ];
 
     for (var user in users) {

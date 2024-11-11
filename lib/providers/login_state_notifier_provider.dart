@@ -1,6 +1,7 @@
 import 'package:first_project/login_state.dart';
 import 'package:first_project/models/email_and_password.dart';
 import 'package:first_project/models/user.dart';
+import 'package:first_project/providers/user_state_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,6 +36,9 @@ class LoginStateNotifier extends Notifier<LoginState> {
     final userAccountExists = userCredentials.values.any((credential) => credential.password == password && credential.email == email);
 
     if (userAccountExists) {
+      EmailAndPassword loggedInUserCredentials = userCredentials.values.firstWhere((credential) => credential.password == password && credential.email == email);
+      User userToLogIn = userCredentials.entries.firstWhere((element) => element.value == loggedInUserCredentials).key;
+      ref.read(userStateProvider.notifier).state = userToLogIn;
       setStatus(const SuccessState());
       return;
     }

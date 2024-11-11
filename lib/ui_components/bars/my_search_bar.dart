@@ -35,27 +35,24 @@ class _MySearchBarState extends ConsumerState<MySearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-      child: SearchBar(
-        controller: _controller,
-        elevation: const WidgetStatePropertyAll(0),
-        leading: SizedBox(
-          height: 20,
-          width: 20,
-          child: Icon(
-            Icons.search,
-            color: context.onBackgroundVariant,
-          ),
+    return SearchBar(
+      controller: _controller,
+      elevation: const WidgetStatePropertyAll(0),
+      leading: SizedBox(
+        height: 20,
+        width: 20,
+        child: Icon(
+          Icons.search,
+          color: context.onBackgroundVariant,
         ),
-        hintText: 'Search...',
-        hintStyle: WidgetStatePropertyAll(
-          context.labelMedium!.copyWith(color: context.onBackgroundVariant),
-        ),
-        backgroundColor: const WidgetStatePropertyAll(Colors.white),
-        shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        ),
+      ),
+      hintText: 'Search...',
+      hintStyle: WidgetStatePropertyAll(
+        context.labelMedium!.copyWith(color: context.onBackgroundVariant),
+      ),
+      backgroundColor: const WidgetStatePropertyAll(Colors.white),
+      shape: WidgetStatePropertyAll(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     );
   }

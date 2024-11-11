@@ -1,9 +1,13 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
+import 'package:first_project/extensions/context_extensions/text_styles.dart';
+import 'package:first_project/providers/all_requests_provider.dart';
 import 'package:first_project/providers/app_lifecycle_notifier_provider.dart';
+import 'package:first_project/providers/user_state_provider.dart';
 import 'package:first_project/ui_components/shareable/add_button.dart';
 import 'package:first_project/ui_components/bars/chip_bar.dart';
 import 'package:first_project/ui_components/bars/my_app_bar.dart';
 import 'package:first_project/ui_components/bars/my_search_bar.dart';
+import 'package:first_project/ui_components/type_of_leave_tile.dart';
 import 'package:first_project/ui_components/user_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,20 +48,61 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
 
   @override
   Widget build(BuildContext context) {
+    final user = ref.read(userStateProvider);
+    final requests = ref.read(allRequestsProvider);
     return Scaffold(
       floatingActionButton: const AddButton(),
       backgroundColor: context.background,
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: SafeArea(
           child: Column(
             children: [
-              MyAppBar(),
-              MySearchBar(),
-              SizedBox(height: 10),
-              ChipBar(),
-              SizedBox(height: 10),
-              UserTiles(),
+              const MyAppBar(),
+              if (user != null && user.isAdmin)
+                SizedBox(
+                  height: 216,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 30),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Manage requests',
+                            style: context.titleMediumBold,
+                          ),
+                          Text(
+                            'See all',
+                            style: context.labelSmall!.copyWith(color: context.secondary),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 14),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: requests.length,
+                                itemBuilder: (context, index) {
+                                  return TypeOfLeaveTile(request: requests[index]);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              SizedBox(height: 22),
+              const MySearchBar(),
+              const SizedBox(height: 10),
+              const ChipBar(),
+              const SizedBox(height: 10),
+              const UserTiles(),
             ],
           ),
         ),
