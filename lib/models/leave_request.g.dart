@@ -18,32 +18,35 @@ class LeaveRequestAdapter extends TypeAdapter<LeaveRequest> {
     };
     return LeaveRequest(
       fields[0] as int,
-      fields[2] as DateTime,
+      fields[1] as int,
       fields[3] as DateTime,
-      fields[1] as LeaveType,
-      fields[4] as RequestVisibility,
-      fields[5] as String,
-      fields[6] as LeaveRequestStatus,
+      fields[4] as DateTime,
+      fields[2] as LeaveType,
+      fields[5] as RequestVisibility,
+      fields[6] as String,
+      fields[7] as LeaveRequestStatus,
     );
   }
 
   @override
   void write(BinaryWriter writer, LeaveRequest obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
-      ..write(obj.userId)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.type)
+      ..write(obj.userId)
       ..writeByte(2)
-      ..write(obj.startDate)
+      ..write(obj.type)
       ..writeByte(3)
-      ..write(obj.endDate)
+      ..write(obj.startDate)
       ..writeByte(4)
-      ..write(obj.visibility)
+      ..write(obj.endDate)
       ..writeByte(5)
-      ..write(obj.reason)
+      ..write(obj.visibility)
       ..writeByte(6)
+      ..write(obj.reason)
+      ..writeByte(7)
       ..write(obj.status);
   }
 

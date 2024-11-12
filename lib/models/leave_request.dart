@@ -8,21 +8,24 @@ part 'leave_request.g.dart';
 @HiveType(typeId: 2)
 class LeaveRequest {
   @HiveField(0)
-  final int userId;
+  final int id;
   @HiveField(1)
-  final LeaveType type;
+  final int userId;
   @HiveField(2)
-  final DateTime startDate;
+  final LeaveType type;
   @HiveField(3)
-  final DateTime endDate;
+  final DateTime startDate;
   @HiveField(4)
-  final RequestVisibility visibility;
+  final DateTime endDate;
   @HiveField(5)
-  final String reason;
+  final RequestVisibility visibility;
   @HiveField(6)
+  final String reason;
+  @HiveField(7)
   LeaveRequestStatus status;
 
   LeaveRequest(
+    this.id,
     this.userId,
     this.startDate,
     this.endDate,

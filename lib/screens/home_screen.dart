@@ -1,8 +1,9 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/providers/all_requests_provider.dart';
 import 'package:first_project/providers/app_lifecycle_notifier_provider.dart';
+import 'package:first_project/providers/pending_requests_notifier_provider.dart';
 import 'package:first_project/providers/user_state_provider.dart';
+import 'package:first_project/screens/request_board_screen.dart';
 import 'package:first_project/ui_components/shareable/add_button.dart';
 import 'package:first_project/ui_components/bars/chip_bar.dart';
 import 'package:first_project/ui_components/bars/my_app_bar.dart';
@@ -49,7 +50,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
   @override
   Widget build(BuildContext context) {
     final user = ref.read(userStateProvider);
-    final requests = ref.read(allRequestsProvider);
+    final pendingRequests = ref.watch(pendingRequestsNotifierProvider);
     return Scaffold(
       floatingActionButton: const AddButton(),
       backgroundColor: context.background,
@@ -61,7 +62,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
               const MyAppBar(),
               if (user != null && user.isAdmin)
                 SizedBox(
-                  height: 216,
+                  height: pendingRequests.isEmpty ? 63 : 215,
                   child: Column(
                     children: [
                       SizedBox(height: 30),
@@ -72,22 +73,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
                             'Manage requests',
                             style: context.titleMediumBold,
                           ),
-                          Text(
-                            'See all',
-                            style: context.labelSmall!.copyWith(color: context.secondary),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, RequestBoardScreen.routeName);
+                            },
+                            child: Text(
+                              'See all',
+                              style: context.labelSmall!.copyWith(color: context.secondary),
+                            ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 14),
+                      if (pendingRequests.isNotEmpty) SizedBox(height: 14),
                       Expanded(
                         child: Row(
                           children: [
                             Expanded(
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: requests.length,
+                                itemCount: pendingRequests.length,
                                 itemBuilder: (context, index) {
-                                  return TypeOfLeaveTile(request: requests[index]);
+                                  return TypeOfLeaveTile(request: pendingRequests[index]);
                                 },
                               ),
                             ),

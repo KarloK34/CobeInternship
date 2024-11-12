@@ -24,6 +24,8 @@ class AppTheme {
         onSurface: AppColors.labelColorLightThemePrimary,
         onSurfaceVariant: AppColors.regularTextColor,
         tertiary: AppColors.green,
+        surfaceTint: AppColors.titleColor,
+        surfaceContainerLowest: Colors.black,
       ),
       primaryColor: AppColors.labelColorLightThemePrimary,
       scaffoldBackgroundColor: AppColors.backgroundColor,

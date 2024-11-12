@@ -21,13 +21,13 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
 void registerHiveAdapters() {
-  Hive.registerAdapter(UserAdapter());
-  Hive.registerAdapter(LeaveRequestAdapter());
   Hive.registerAdapter(LeaveTypeAdapter());
   Hive.registerAdapter(RequestVisibilityAdapter());
   Hive.registerAdapter(LeaveRequestStatusAdapter());
   Hive.registerAdapter(RoleAdapter());
   Hive.registerAdapter(ConnectionStatusAdapter());
+  Hive.registerAdapter(UserAdapter());
+  Hive.registerAdapter(LeaveRequestAdapter());
 }
 
 void main() async {
@@ -35,9 +35,12 @@ void main() async {
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   registerHiveAdapters();
+  await Hive.deleteBoxFromDisk('requestBox');
+  await Hive.deleteBoxFromDisk('userBox');
   final userBox = await Hive.openBox<User>('userBox');
-  await Hive.openBox<LeaveRequest>('requestBox');
+  final requestBox = await Hive.openBox<LeaveRequest>('requestBox');
   await userBox.clear();
+  await requestBox.clear();
   createUsers();
   createRequests();
   runApp(const ProviderScope(child: MyApp()));
@@ -95,9 +98,9 @@ void createRequests() {
     User user2 = userBox.values.last;
 
     final requests = [
-      LeaveRequest(user1.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.sick, RequestVisibility.everyone, "Flu", LeaveRequestStatus.pending),
+      LeaveRequest(1, user1.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.sick, RequestVisibility.everyone, "Flu", LeaveRequestStatus.pending),
       LeaveRequest(
-          user2.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.vacation, RequestVisibility.everyone, "Vienna", LeaveRequestStatus.pending),
+          2, user2.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.vacation, RequestVisibility.everyone, "Vienna", LeaveRequestStatus.pending),
     ];
 
     for (var request in requests) {
