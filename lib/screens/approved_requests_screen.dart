@@ -1,8 +1,8 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/providers/approved_request_notifier_provider.dart';
-import 'package:first_project/ui_components/shareable/add_button.dart';
-import 'package:first_project/ui_components/approved_type_of_leave_tile.dart';
+import 'package:first_project/providers/notifier_providers/approved_request_notifier_provider.dart';
+import 'package:first_project/ui_components/request_board/approved_type_of_leave_tile.dart';
+import 'package:first_project/ui_components/buttons/add_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

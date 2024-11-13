@@ -1,27 +1,32 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginFailedDialog extends ConsumerWidget {
-  const LoginFailedDialog({
+class PopUpDialog extends ConsumerWidget {
+  final String title;
+  final String message;
+  final void Function() onPressed;
+  const PopUpDialog({
+    required this.title,
+    required this.message,
+    required this.onPressed,
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AlertDialog(
-      backgroundColor: Colors.white,
+      backgroundColor: context.onSecondary,
       title: Center(
         child: Text(
-          ErrorState.title,
+          title,
           style: context.titleMediumBold,
         ),
       ),
       content: Text(
-        ErrorState.message,
-        style: context.bodyMedium,
+        message,
+        style: context.bodyMedium!.copyWith(color: context.primary.withOpacity(0.75)),
         textAlign: TextAlign.center,
       ),
       actions: [
@@ -29,15 +34,15 @@ class LoginFailedDialog extends ConsumerWidget {
           child: TextButton(
             style: OutlinedButton.styleFrom(
                 side: BorderSide(color: context.secondary),
-                foregroundColor: context.secondary,
-                backgroundColor: Colors.transparent,
+                backgroundColor: context.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 )),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Okay'),
+            onPressed: onPressed,
+            child: Text(
+              'Okay',
+              style: context.labelSmall!.copyWith(color: context.secondary),
+            ),
           ),
         ),
       ],

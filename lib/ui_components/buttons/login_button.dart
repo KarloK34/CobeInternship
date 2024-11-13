@@ -1,12 +1,12 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/login_state.dart';
 import 'package:first_project/main.dart';
-import 'package:first_project/providers/email_state_provider.dart';
-import 'package:first_project/providers/login_state_notifier_provider.dart';
-import 'package:first_project/providers/password_state_provider.dart';
+import 'package:first_project/providers/state_providers/email_state_provider.dart';
+import 'package:first_project/providers/notifier_providers/login_state_notifier_provider.dart';
+import 'package:first_project/providers/state_providers/password_state_provider.dart';
+import 'package:first_project/ui_components/shareable/request_state.dart';
 import 'package:first_project/screens/home_screen.dart';
-import 'package:first_project/ui_components/login/login_failed_dialog.dart';
+import 'package:first_project/ui_components/shareable/pop_up_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,8 +23,19 @@ class LoginButton extends ConsumerWidget {
     ref.watch(loginStateNotifierProvider);
     final loginStatusNotifier = ref.read(loginStateNotifierProvider.notifier);
     var userCredentials = createUserCredentials();
-    ref.listen(loginStateNotifierProvider, (LoginState? previousState, LoginState newState) {
-      if (newState == const ErrorState()) showDialog(context: context, builder: (context) => const LoginFailedDialog());
+    ref.listen(loginStateNotifierProvider, (_, RequestState newState) {
+      if (newState == const ErrorState()) {
+        showDialog(
+          context: context,
+          builder: (context) => PopUpDialog(
+            title: 'Login Failed',
+            message: 'Invalid email or password. Please try again.',
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        );
+      }
       if (newState == const SuccessState()) Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     });
 
@@ -43,8 +54,8 @@ class LoginButton extends ConsumerWidget {
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
+            backgroundColor: context.transparent,
+            shadowColor: context.transparent,
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
@@ -61,12 +72,12 @@ class LoginButton extends ConsumerWidget {
               );
         },
         child: loginStatusNotifier.state == const LoadingState()
-            ? const CircularProgressIndicator(
-                color: Colors.white,
+            ? CircularProgressIndicator(
+                color: context.onSecondary,
               )
             : Text(
                 'Login',
-                style: context.titleSmall!.copyWith(color: Colors.white),
+                style: context.titleSmall!.copyWith(color: context.onSecondary),
               ),
       ),
     );

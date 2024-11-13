@@ -14,7 +14,7 @@ class PendingRequestNotifier extends Notifier<List<LeaveRequest>> {
     return state;
   }
 
-  void removeRequest(LeaveRequest request) {
-    state = state.where((req) => req != request).toList();
+  void refresh() {
+    state = requestBox.values.where((request) => request.status == LeaveRequestStatus.pending).toList();
   }
 }

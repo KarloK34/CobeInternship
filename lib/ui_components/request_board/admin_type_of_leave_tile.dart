@@ -4,11 +4,9 @@ import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/extensions/string_extensions.dart';
 import 'package:first_project/models/leave_request.dart';
 import 'package:first_project/models/user.dart';
-import 'package:first_project/providers/approved_request_notifier_provider.dart';
-import 'package:first_project/providers/pending_requests_notifier_provider.dart';
+import 'package:first_project/providers/notifier_providers/update_request_notifier_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
 class AdminTypeOfLeaveTile extends ConsumerWidget {
@@ -29,7 +27,7 @@ class AdminTypeOfLeaveTile extends ConsumerWidget {
       margin: EdgeInsets.only(right: 12),
       padding: const EdgeInsets.only(top: 15, left: 14, bottom: 12, right: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.onSecondary,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -71,18 +69,8 @@ class AdminTypeOfLeaveTile extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  onPressed: () async {
-                    request.status = LeaveRequestStatus.rejected;
-                    ref.read(pendingRequestsNotifierProvider.notifier).removeRequest(request);
-                    final requestBox = Hive.box<LeaveRequest>('requestBox');
-                    final requestKey = requestBox.keys.firstWhere(
-                      (key) => requestBox.get(key)!.id == request.id,
-                      orElse: () => null,
-                    );
-
-                    if (requestKey != null) {
-                      requestBox.put(requestKey, request);
-                    }
+                  onPressed: () {
+                    ref.read(updateRequestNotifierProvider.notifier).update(request, LeaveRequestStatus.rejected, context);
                   },
                   child: Text(
                     'Reject',
@@ -100,9 +88,7 @@ class AdminTypeOfLeaveTile extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () {
-                    request.status = LeaveRequestStatus.approved;
-                    ref.read(approvedRequestsNotifierProvider.notifier).addRequest(request);
-                    ref.read(pendingRequestsNotifierProvider.notifier).removeRequest(request);
+                    ref.read(updateRequestNotifierProvider.notifier).update(request, LeaveRequestStatus.approved, context);
                   },
                   child: Text(
                     'Approve',

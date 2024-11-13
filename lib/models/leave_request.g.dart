@@ -17,7 +17,6 @@ class LeaveRequestAdapter extends TypeAdapter<LeaveRequest> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return LeaveRequest(
-      fields[0] as int,
       fields[1] as int,
       fields[3] as DateTime,
       fields[4] as DateTime,

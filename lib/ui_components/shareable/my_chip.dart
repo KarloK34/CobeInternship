@@ -4,7 +4,7 @@ import 'package:first_project/enums/leave_request_status.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/extensions/string_extensions.dart';
-import 'package:first_project/providers/selected_filters_notifier_provider.dart';
+import 'package:first_project/providers/notifier_providers/selected_filters_notifier_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,7 +24,6 @@ class MyChip extends ConsumerWidget {
     Color labelColor;
     Color borderColor;
     final regularTextColor = context.onBackgroundVariant;
-    final green = context.tertiary;
     final backgroundColor = context.background;
     const white = Colors.white;
 
@@ -42,8 +41,9 @@ class MyChip extends ConsumerWidget {
         break;
       case ChipType.regular:
         chipLabel = label ?? 'Chip';
-        chipColor = ref.watch(selectedFiltersNotifierProvider.select((e) => e.contains(chipLabel))) ? green : backgroundColor;
-        labelColor = borderColor = chipColor == green ? white : regularTextColor;
+        chipColor =
+            ref.watch(selectedFiltersNotifierProvider.select((e) => e.contains(chipLabel))) ? _getRegularChipColor(context, chipLabel) : backgroundColor;
+        labelColor = borderColor = chipColor != backgroundColor ? white : regularTextColor;
         break;
     }
 
@@ -58,6 +58,23 @@ class MyChip extends ConsumerWidget {
         side: BorderSide(color: borderColor),
       ),
     );
+  }
+
+  Color _getRegularChipColor(BuildContext context, String label) {
+    switch (label) {
+      case 'Online':
+        return context.tertiary;
+      case 'Offline':
+        return context.tertiaryContainer.withOpacity(0.4);
+      case 'Parental':
+        return context.secondary;
+      case 'Vacation':
+        return context.primaryContainer;
+      case 'Sick':
+        return context.errorContainer;
+      default:
+        return Colors.transparent;
+    }
   }
 
   Color _getRequestColor(LeaveRequestStatus? requestStatus, BuildContext context) {

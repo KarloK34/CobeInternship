@@ -98,9 +98,11 @@ void createRequests() {
     User user2 = userBox.values.last;
 
     final requests = [
-      LeaveRequest(1, user1.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.sick, RequestVisibility.everyone, "Flu", LeaveRequestStatus.pending),
+      LeaveRequest(user1.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.sick, RequestVisibility.everyone, "Flu", LeaveRequestStatus.pending),
+      LeaveRequest(user1.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.sick, RequestVisibility.everyone, "Flu", LeaveRequestStatus.pending),
+      LeaveRequest(user1.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.sick, RequestVisibility.everyone, "Flu", LeaveRequestStatus.pending),
       LeaveRequest(
-          2, user2.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.vacation, RequestVisibility.everyone, "Vienna", LeaveRequestStatus.pending),
+          user2.id, DateTime(2024, 11, 20), DateTime(2024, 11, 27), LeaveType.vacation, RequestVisibility.everyone, "Vienna", LeaveRequestStatus.pending),
     ];
 
     for (var request in requests) {

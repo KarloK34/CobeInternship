@@ -1,5 +1,5 @@
 import 'package:first_project/providers/filtered_users_provider.dart';
-import 'package:first_project/ui_components/user_container.dart';
+import 'package:first_project/ui_components/home/user_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

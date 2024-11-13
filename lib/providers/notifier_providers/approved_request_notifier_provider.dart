@@ -14,7 +14,7 @@ class ApprovedRequestNotifier extends Notifier<List<LeaveRequest>> {
     return state;
   }
 
-  void addRequest(LeaveRequest request) {
-    state = [...state, request];
+  void refresh() {
+    state = requestBox.values.where((request) => request.status == LeaveRequestStatus.approved).toList();
   }
 }

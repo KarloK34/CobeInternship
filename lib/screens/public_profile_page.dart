@@ -1,9 +1,9 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/models/user.dart';
-import 'package:first_project/providers/user_requests_notifier_provider.dart';
-import 'package:first_project/ui_components/shareable/add_button.dart';
-import 'package:first_project/ui_components/type_of_leave_tile.dart';
-import 'package:first_project/ui_components/user_details.dart';
+import 'package:first_project/providers/notifier_providers/user_requests_notifier_provider.dart';
+import 'package:first_project/ui_components/buttons/add_button.dart';
+import 'package:first_project/ui_components/profile/type_of_leave_tile.dart';
+import 'package:first_project/ui_components/profile/user_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
