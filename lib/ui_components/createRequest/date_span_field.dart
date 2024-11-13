@@ -1,6 +1,6 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/providers/date_map_state_provider.dart';
+import 'package:first_project/providers/form_state_notifier_provider.dart';
 import 'package:first_project/ui_components/createRequest/custom_date_range_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,9 +36,9 @@ class DateSpanField extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(left: 24.0),
               child: Text(
-                (ref.watch(dateMapStateProvider).entries.first.value != null && ref.watch(dateMapStateProvider).entries.last.value != null)
-                    ? '${DateFormat('dd/MM/yyyy').format(ref.watch(dateMapStateProvider).entries.first.value!.toLocal())} - ${DateFormat('dd/MM/yyyy').format(ref.watch(dateMapStateProvider).entries.last.value!.toLocal())}'
-                    : 'Date',
+                (ref.watch(formStateNotifierProvider).startDate != null && ref.watch(formStateNotifierProvider).endDate != null)
+                    ? '${DateFormat('dd/MM/yyyy').format(ref.watch(formStateNotifierProvider).startDate!.toLocal())} - ${DateFormat('dd/MM/yyyy').format(ref.watch(formStateNotifierProvider).endDate!.toLocal())}'
+                    : 'Select Date',
                 style: context.labelMedium,
               ),
             )

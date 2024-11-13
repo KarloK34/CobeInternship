@@ -51,64 +51,50 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
     return Scaffold(
       floatingActionButton: const AddButton(),
       backgroundColor: context.background,
-      body: isFabExtended
-          ? Stack(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: SafeArea(
-                    child: Column(
-                      children: [
-                        MyAppBar(),
-                        MySearchBar(),
-                        SizedBox(height: 10),
-                        ChipBar(),
-                        SizedBox(height: 10),
-                        UserTiles(),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  color: Colors.black.withOpacity(0.5),
-                ),
-                const Positioned(
-                  right: 46,
-                  bottom: 170,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: 132,
-                        height: 36,
-                        child: AddAbsenceButton(),
-                      ),
-                      SizedBox(height: 10),
-                      SizedBox(
-                        width: 154,
-                        height: 36,
-                        child: CreateRequestButton(),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            )
-          : const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: SafeArea(
-                child: Column(
-                  children: [
-                    MyAppBar(),
-                    MySearchBar(),
-                    SizedBox(height: 10),
-                    ChipBar(),
-                    SizedBox(height: 10),
-                    UserTiles(),
-                  ],
-                ),
+      body: Stack(
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: SafeArea(
+              child: Column(
+                children: [
+                  MyAppBar(),
+                  MySearchBar(),
+                  SizedBox(height: 10),
+                  ChipBar(),
+                  SizedBox(height: 10),
+                  UserTiles(),
+                ],
               ),
             ),
+          ),
+          if (isFabExtended) ...[
+            Container(
+              color: Colors.black.withOpacity(0.5),
+            ),
+            const Positioned(
+              right: 46,
+              bottom: 170,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  SizedBox(
+                    width: 132,
+                    height: 36,
+                    child: AddAbsenceButton(),
+                  ),
+                  SizedBox(height: 10),
+                  SizedBox(
+                    width: 154,
+                    height: 36,
+                    child: CreateRequestButton(),
+                  ),
+                ],
+              ),
+            ),
+          ]
+        ],
+      ),
     );
   }
 }

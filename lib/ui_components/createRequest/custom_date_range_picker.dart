@@ -1,6 +1,6 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/providers/date_map_state_provider.dart';
+import 'package:first_project/providers/form_state_notifier_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -183,11 +183,8 @@ class _CustomDateRangePickerDialogState extends ConsumerState<CustomDateRangePic
                       backgroundColor: WidgetStatePropertyAll(context.secondary),
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)))),
                   onPressed: () {
-                    ref.read(dateMapStateProvider.notifier).state = {
-                      'start': _startDate,
-                      'end': _endDate,
-                    };
-                    Navigator.of(context).pop();
+                    ref.read(formStateNotifierProvider.notifier).setDate(startDate: _startDate, endDate: _endDate);
+                    Navigator.pop(context);
                   },
                   child: const Text('Save'),
                 ),

@@ -1,15 +1,12 @@
-import 'package:first_project/enums/leave_request_status.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/models/leave_request.dart';
-import 'package:first_project/providers/date_map_state_provider.dart';
-import 'package:first_project/providers/leave_type_state_provider.dart';
-import 'package:first_project/providers/reason_state_provider.dart';
-import 'package:first_project/providers/request_visibility_state_provider.dart';
-import 'package:first_project/providers/user_notifier_provider.dart';
+import 'package:first_project/providers/create_request_notifier_provider.dart';
+import 'package:first_project/providers/form_state_notifier_provider.dart';
+import 'package:first_project/request_creation_state.dart';
+import 'package:first_project/screens/home_screen.dart';
+import 'package:first_project/ui_components/shareable/pop_up_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
 
 class SaveRequestButton extends ConsumerWidget {
   const SaveRequestButton({
@@ -18,26 +15,32 @@ class SaveRequestButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(createRequestNotifierProvider, (_, RequestCreationState newState) {
+      if (newState == const SuccessState()) {
+        showDialog(
+          context: context,
+          builder: (context) => PopUpDialog(
+            title: 'Request Created',
+            message: 'Your request is created and it is currently being reviewed.',
+            onPressed: () {
+              Navigator.pushNamed(context, HomeScreen.routeName);
+            },
+          ),
+        );
+      }
+    });
+    final isValidInput = ref.watch(formStateNotifierProvider.select((e) => e.isValid));
     return SizedBox(
       width: 96,
       child: TextButton(
         style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(context.secondary),
+            backgroundColor: isValidInput ? WidgetStatePropertyAll(context.secondary) : WidgetStatePropertyAll(context.secondary.withOpacity(0.5)),
             shape: WidgetStatePropertyAll(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             )),
         onPressed: () {
-          final requestBox = Hive.box<LeaveRequest>('requestBox');
-          final user = ref.read(userStateProvider);
-          final startDate = ref.read(dateMapStateProvider).values.first;
-          final endDate = ref.read(dateMapStateProvider).values.last;
-          final type = ref.read(leaveTypeStateProvider);
-          final visibility = ref.read(requestVisibilityStateProvider);
-          final reason = ref.read(reasonStateProvider);
-          if (user != null && startDate != null && endDate != null) {
-            requestBox.add(LeaveRequest(user.id, startDate, endDate, type, visibility, reason, LeaveRequestStatus.pending));
-          }
-          Navigator.pop(context);
+          if (!isValidInput) return;
+          ref.read(createRequestNotifierProvider.notifier).createRequest();
         },
         child: Text(
           'Save',

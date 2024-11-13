@@ -2,7 +2,7 @@ import 'package:first_project/enums/leave_type.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/extensions/string_extensions.dart';
-import 'package:first_project/providers/leave_type_state_provider.dart';
+import 'package:first_project/providers/form_state_notifier_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -31,7 +31,7 @@ class LeaveTypeDialog extends ConsumerWidget {
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
                       side: WidgetStatePropertyAll(BorderSide(color: context.onBackgroundVariant))),
                   onPressed: () {
-                    ref.read(leaveTypeStateProvider.notifier).state = LeaveType.values[index];
+                    ref.read(formStateNotifierProvider.notifier).setLeaveType(LeaveType.values[index]);
                     Navigator.pop(context);
                   },
                   child: Text(

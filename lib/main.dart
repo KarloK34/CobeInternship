@@ -35,6 +35,8 @@ void main() async {
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   registerHiveAdapters();
+  await Hive.deleteBoxFromDisk('userBox');
+  await Hive.deleteBoxFromDisk('requestBox');
   await Hive.openBox<User>('userBox');
   await Hive.openBox<LeaveRequest>('requestBox');
   createUsers();

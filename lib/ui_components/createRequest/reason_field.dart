@@ -1,6 +1,6 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/providers/reason_state_provider.dart';
+import 'package:first_project/providers/form_state_notifier_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,7 +18,7 @@ class ReasonField extends ConsumerWidget {
       ),
       child: TextField(
         onChanged: (value) {
-          ref.read(reasonStateProvider.notifier).state = value;
+          ref.read(formStateNotifierProvider.notifier).setReason(value);
         },
         maxLines: null,
         decoration: InputDecoration(

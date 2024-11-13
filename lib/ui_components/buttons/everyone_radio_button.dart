@@ -1,7 +1,7 @@
 import 'package:first_project/enums/request_visibility.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/providers/request_visibility_state_provider.dart';
+import 'package:first_project/providers/form_state_notifier_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,6 +15,8 @@ class EveryoneRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final visibility = ref.watch(formStateNotifierProvider.select((e) => e.visibility));
+
     return Container(
       width: MediaQuery.of(context).size.width * 0.9,
       margin: const EdgeInsets.only(left: 17.0, top: 17.0, right: 14.0),
@@ -46,9 +48,9 @@ class EveryoneRadioButton extends StatelessWidget {
               ),
               Radio(
                 value: RequestVisibility.everyone,
-                groupValue: ref.watch(requestVisibilityStateProvider),
+                groupValue: visibility,
                 onChanged: (RequestVisibility? value) {
-                  ref.read(requestVisibilityStateProvider.notifier).state = value!;
+                  ref.read(formStateNotifierProvider.notifier).setVisibility(value!);
                 },
                 fillColor: WidgetStatePropertyAll(context.primaryColorDark),
               )

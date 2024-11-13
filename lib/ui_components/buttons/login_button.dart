@@ -6,7 +6,7 @@ import 'package:first_project/providers/email_state_provider.dart';
 import 'package:first_project/providers/login_state_notifier_provider.dart';
 import 'package:first_project/providers/password_state_provider.dart';
 import 'package:first_project/screens/home_screen.dart';
-import 'package:first_project/ui_components/login/login_failed_dialog.dart';
+import 'package:first_project/ui_components/shareable/pop_up_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,7 +24,18 @@ class LoginButton extends ConsumerWidget {
     final loginStatusNotifier = ref.read(loginStateNotifierProvider.notifier);
     var userCredentials = createUserCredentials();
     ref.listen(loginStateNotifierProvider, (LoginState? previousState, LoginState newState) {
-      if (newState == const ErrorState()) showDialog(context: context, builder: (context) => const LoginFailedDialog());
+      if (newState == const ErrorState()) {
+        showDialog(
+          context: context,
+          builder: (context) => PopUpDialog(
+            title: ErrorState.title,
+            message: ErrorState.message,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        );
+      }
       if (newState == const SuccessState()) Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     });
 
