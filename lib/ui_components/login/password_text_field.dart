@@ -1,5 +1,5 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
-import 'package:first_project/providers/password_state_provider.dart';
+import 'package:first_project/providers/state_providers/password_state_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

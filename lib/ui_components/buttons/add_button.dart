@@ -1,5 +1,5 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
-import 'package:first_project/providers/fab_state_provider.dart';
+import 'package:first_project/providers/state_providers/fab_state_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

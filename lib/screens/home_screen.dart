@@ -1,13 +1,13 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
-import 'package:first_project/providers/app_lifecycle_notifier_provider.dart';
-import 'package:first_project/providers/fab_state_provider.dart';
+import 'package:first_project/providers/notifier_providers/app_lifecycle_notifier_provider.dart';
+import 'package:first_project/providers/state_providers/fab_state_provider.dart';
 import 'package:first_project/ui_components/buttons/add_absence_button.dart';
 import 'package:first_project/ui_components/buttons/add_button.dart';
 import 'package:first_project/ui_components/buttons/create_request_button.dart';
 import 'package:first_project/ui_components/bars/chip_bar.dart';
 import 'package:first_project/ui_components/bars/my_app_bar.dart';
 import 'package:first_project/ui_components/bars/my_search_bar.dart';
-import 'package:first_project/ui_components/user_tiles.dart';
+import 'package:first_project/ui_components/home/user_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

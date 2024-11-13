@@ -28,6 +28,7 @@ class _CreateRequestScreenState extends ConsumerState<CreateRequestScreen> {
         backgroundColor: context.background,
         leading: BackButton(
           color: context.primary,
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Create Request',

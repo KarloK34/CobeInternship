@@ -1,7 +1,7 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/extensions/string_extensions.dart';
-import 'package:first_project/providers/form_state_notifier_provider.dart';
+import 'package:first_project/providers/notifier_providers/form_state_notifier_provider.dart';
 import 'package:first_project/ui_components/createRequest/leave_type_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +11,7 @@ class LeaveTypeField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final form = ref.watch(formStateNotifierProvider);
+    final leaveType = ref.watch(formStateNotifierProvider.select((form) => form.leaveType));
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -39,7 +39,7 @@ class LeaveTypeField extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(left: 24.0),
               child: Text(
-                form.leaveType.name.capitalize(),
+                leaveType.name.capitalize(),
                 style: context.labelMedium,
               ),
             )

@@ -2,7 +2,7 @@ import 'package:first_project/enums/leave_type.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/extensions/string_extensions.dart';
-import 'package:first_project/providers/form_state_notifier_provider.dart';
+import 'package:first_project/providers/notifier_providers/form_state_notifier_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

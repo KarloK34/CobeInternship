@@ -3,10 +3,15 @@ import 'package:first_project/enums/leave_type.dart';
 import 'package:first_project/enums/request_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final formStateNotifierProvider = StateNotifierProvider.autoDispose<FormStateNotifier, FormState>((ref) => FormStateNotifier());
+final formStateNotifierProvider = AutoDisposeNotifierProvider<FormStateNotifier, FormState>(() => FormStateNotifier());
 
-class FormStateNotifier extends StateNotifier<FormState> {
-  FormStateNotifier() : super(FormState());
+class FormStateNotifier extends AutoDisposeNotifier<FormState> {
+  @override
+  FormState build() {
+    state = FormState();
+    return state;
+  }
+
   void setReason(String reason) {
     state = state.copyWith(reason: reason);
   }

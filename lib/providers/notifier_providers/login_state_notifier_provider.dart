@@ -1,18 +1,18 @@
-import 'package:first_project/login_state.dart';
 import 'package:first_project/models/email_and_password.dart';
 import 'package:first_project/models/user.dart';
-import 'package:first_project/providers/state_provider.dart';
+import 'package:first_project/providers/state_providers/user_state_provider.dart';
+import 'package:first_project/ui_components/shareable/request_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final loginStateNotifierProvider = NotifierProvider<LoginStateNotifier, LoginState>(() => LoginStateNotifier());
+final loginStateNotifierProvider = NotifierProvider<LoginStateNotifier, RequestState>(() => LoginStateNotifier());
 
-class LoginStateNotifier extends Notifier<LoginState> {
+class LoginStateNotifier extends Notifier<RequestState> {
   @override
-  LoginState get state => super.state;
+  RequestState get state => super.state;
   @override
-  LoginState build() {
+  RequestState build() {
     return const InitialState();
   }
 
@@ -47,7 +47,7 @@ class LoginStateNotifier extends Notifier<LoginState> {
     setStatus(const InitialState());
   }
 
-  void setStatus(LoginState loginState) {
+  void setStatus(RequestState loginState) {
     state = loginState;
   }
 }

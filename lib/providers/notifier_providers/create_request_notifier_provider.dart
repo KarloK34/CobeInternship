@@ -1,18 +1,21 @@
 import 'package:first_project/enums/leave_request_status.dart';
 import 'package:first_project/models/leave_request.dart';
-import 'package:first_project/providers/form_state_notifier_provider.dart';
-import 'package:first_project/providers/state_provider.dart';
-import 'package:first_project/request_creation_state.dart';
+import 'package:first_project/providers/notifier_providers/form_state_notifier_provider.dart';
+import 'package:first_project/providers/state_providers/user_state_provider.dart';
+import 'package:first_project/ui_components/shareable/request_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
-final createRequestNotifierProvider = StateNotifierProvider.autoDispose<CreateRequestNotifier, RequestCreationState>((ref) => CreateRequestNotifier(ref));
+final createRequestNotifierProvider = AutoDisposeNotifierProvider<CreateRequestNotifier, RequestState>(() => CreateRequestNotifier());
 
-class CreateRequestNotifier extends StateNotifier<RequestCreationState> {
+class CreateRequestNotifier extends AutoDisposeNotifier<RequestState> {
   final requestBox = Hive.box<LeaveRequest>('requestBox');
-  final Ref ref;
 
-  CreateRequestNotifier(this.ref) : super(const InitialState());
+  @override
+  RequestState build() {
+    state = const InitialState();
+    return state;
+  }
 
   Future<void> createRequest() async {
     final form = ref.read(formStateNotifierProvider);

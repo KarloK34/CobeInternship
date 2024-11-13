@@ -1,4 +1,4 @@
-import 'package:first_project/providers/state_provider.dart';
+import 'package:first_project/providers/state_providers/user_state_provider.dart';
 import 'package:first_project/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

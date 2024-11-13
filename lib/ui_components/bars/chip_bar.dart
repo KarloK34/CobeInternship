@@ -1,6 +1,6 @@
 import 'package:first_project/enums/chip_type.dart';
 import 'package:first_project/providers/chip_labels_provider.dart';
-import 'package:first_project/providers/selected_filters_notifier_provider.dart';
+import 'package:first_project/providers/notifier_providers/selected_filters_notifier_provider.dart';
 import 'package:first_project/ui_components/shareable/my_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

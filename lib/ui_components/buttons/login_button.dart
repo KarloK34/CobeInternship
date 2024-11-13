@@ -1,10 +1,10 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/login_state.dart';
 import 'package:first_project/main.dart';
-import 'package:first_project/providers/email_state_provider.dart';
-import 'package:first_project/providers/login_state_notifier_provider.dart';
-import 'package:first_project/providers/password_state_provider.dart';
+import 'package:first_project/providers/state_providers/email_state_provider.dart';
+import 'package:first_project/providers/notifier_providers/login_state_notifier_provider.dart';
+import 'package:first_project/providers/state_providers/password_state_provider.dart';
+import 'package:first_project/ui_components/shareable/request_state.dart';
 import 'package:first_project/screens/home_screen.dart';
 import 'package:first_project/ui_components/shareable/pop_up_dialog.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +23,13 @@ class LoginButton extends ConsumerWidget {
     ref.watch(loginStateNotifierProvider);
     final loginStatusNotifier = ref.read(loginStateNotifierProvider.notifier);
     var userCredentials = createUserCredentials();
-    ref.listen(loginStateNotifierProvider, (LoginState? previousState, LoginState newState) {
+    ref.listen(loginStateNotifierProvider, (RequestState? previousState, RequestState newState) {
       if (newState == const ErrorState()) {
         showDialog(
           context: context,
           builder: (context) => PopUpDialog(
-            title: ErrorState.title,
-            message: ErrorState.message,
+            title: 'Login Failed',
+            message: 'Invalid email or password. Please try again.',
             onPressed: () {
               Navigator.pop(context);
             },
