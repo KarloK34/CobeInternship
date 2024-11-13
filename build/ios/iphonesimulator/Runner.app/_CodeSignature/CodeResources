@@ -18,7 +18,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		dy5fhkMPInYs7PtAI/ZOxnEkHaw=
+		eLQhnuWZAj01NjqeVzrhErP53O0=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		1wEvuVa7SR/XR/jl5aBuv1UaaB4=
+		DM4d00bzO+8MY9duOeoYm1A+8hg=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		Q2zp4YvLrhCFH9UAxfZo1kkQRt0=
+		4251AmB5MfuT+scjQvS9v0pdyXY=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -75,6 +75,10 @@
 		<key>Frameworks/App.framework/flutter_assets/assets/fonts/FilsonProRegular.otf</key>
 		<data>
 		pC4cv/7zv1TDqq8hn1khZ6yfCC0=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/png/doodle.png</key>
+		<data>
+		hEMbuR+X5yps5Q2OTyTT25C05vU=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/png/profile_picture.jpeg</key>
 		<data>
@@ -102,7 +106,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		ebLhkZtrhOfXrDNL5EKsk+sj8hs=
+		GY61B21jUypodFQRN7xZELmxhww=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -268,7 +272,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			h9IqTfR/scckWwVJgHCs0Y2Fd3Ajrsf4Lyfs0cy8tNk=
+			Img3f0nj/5kyEfd6QrGm9DNg/DDscsAaEB4ErNR53WI=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
@@ -317,7 +321,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DMH/5h3hFj8m4Lddg5mbrhoKLzuAwG5HLQOHQLXJsGM=
+			1Cpj7uEJZb9HPvxs+VKI9GDsJbauiroTlTZbc9SfHw4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -331,7 +335,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			JsOjDrhUbN6agyYxbiua98WKf0jLsLye/N7o3hM0uCQ=
+			FGrJ+/wNbKWc3dIXD/fEa6aCn0a8OYNn09pciJHKg3M=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -367,6 +371,13 @@
 			<key>hash2</key>
 			<data>
 			YEOy67morT+tmiwiK6y8QQx5V882Ad5MxClB2WBxxUg=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/png/doodle.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			wqAR8SkBEDPRdLPl6ChzC0PAnoCDXNv39bIdH8iOPYg=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/png/profile_picture.jpeg</key>
@@ -415,7 +426,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AOW+1/8zLjRgvOunnTS3CPIKxKP0Ifz3MDxdfuHvAC4=
+			VsUe6SXiSQPCV+/90p8suGjN5YrbNKIum5sULw08T/s=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

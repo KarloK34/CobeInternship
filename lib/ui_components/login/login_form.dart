@@ -1,6 +1,6 @@
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/ui_components/login/email_text_field.dart';
-import 'package:first_project/ui_components/login/login_button.dart';
+import 'package:first_project/ui_components/buttons/login_button.dart';
 import 'package:first_project/ui_components/login/password_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
