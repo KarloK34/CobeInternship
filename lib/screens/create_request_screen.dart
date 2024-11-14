@@ -4,9 +4,9 @@ import 'package:first_project/ui_components/buttons/admin_radio_button.dart';
 import 'package:first_project/ui_components/buttons/discard_request_button.dart';
 import 'package:first_project/ui_components/buttons/everyone_radio_button.dart';
 import 'package:first_project/ui_components/buttons/save_request_button.dart';
-import 'package:first_project/ui_components/createRequest/date_span_field.dart';
-import 'package:first_project/ui_components/createRequest/leave_type_field.dart';
-import 'package:first_project/ui_components/createRequest/reason_field.dart';
+import 'package:first_project/ui_components/create_request/date_span_field.dart';
+import 'package:first_project/ui_components/create_request/leave_type_field.dart';
+import 'package:first_project/ui_components/create_request/reason_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

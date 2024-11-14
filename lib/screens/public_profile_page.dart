@@ -45,9 +45,15 @@ class PublicProfilePage extends ConsumerWidget {
                 if (userRequests.hasValue)
                   Expanded(
                     child: ListView.builder(
+                      padding: EdgeInsets.only(left: 16, right: 4, bottom: 14),
                       itemCount: userRequests.value!.length,
                       itemBuilder: (context, index) {
-                        return TypeOfLeaveTile(request: userRequests.value![index]);
+                        return Column(
+                          children: [
+                            TypeOfLeaveTile(request: userRequests.value![index]),
+                            SizedBox(height: 14),
+                          ],
+                        );
                       },
                     ),
                   ),

@@ -1,12 +1,15 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/providers/notifier_providers/app_lifecycle_notifier_provider.dart';
 import 'package:first_project/providers/state_providers/fab_state_provider.dart';
+import 'package:first_project/providers/notifier_providers/pending_requests_notifier_provider.dart';
+import 'package:first_project/providers/state_providers/user_state_provider.dart';
 import 'package:first_project/ui_components/buttons/add_absence_button.dart';
 import 'package:first_project/ui_components/buttons/add_button.dart';
 import 'package:first_project/ui_components/buttons/create_request_button.dart';
 import 'package:first_project/ui_components/bars/chip_bar.dart';
 import 'package:first_project/ui_components/bars/my_app_bar.dart';
 import 'package:first_project/ui_components/bars/my_search_bar.dart';
+import 'package:first_project/ui_components/home/manage_requests_list.dart';
 import 'package:first_project/ui_components/home/user_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -48,17 +51,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
   @override
   Widget build(BuildContext context) {
     final isFabExtended = ref.watch(fabStateProvider);
+    final user = ref.read(userStateProvider);
+    final pendingRequests = ref.watch(pendingRequestsNotifierProvider);
     return Scaffold(
       floatingActionButton: const AddButton(),
       backgroundColor: context.background,
       body: Stack(
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.all(16.0),
             child: SafeArea(
               child: Column(
                 children: [
                   MyAppBar(),
+                  if (user != null && user.isAdmin) ManageRequestsList(pendingRequests: pendingRequests),
+                  SizedBox(height: 22),
                   MySearchBar(),
                   SizedBox(height: 10),
                   ChipBar(),
@@ -69,8 +76,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
             ),
           ),
           if (isFabExtended) ...[
-            Container(
-              color: Colors.black.withOpacity(0.5),
+            GestureDetector(
+              onTap: () => ref.read(fabStateProvider.notifier).update((e) => !e),
+              child: Container(
+                color: context.black.withOpacity(0.5),
+              ),
             ),
             const Positioned(
               right: 46,
@@ -92,7 +102,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
                 ],
               ),
             ),
-          ]
+          ],
         ],
       ),
     );

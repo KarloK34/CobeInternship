@@ -6,6 +6,7 @@ abstract class AppColors {
   static const Color backgroundColor = Color(0xFFE9ECF4);
   static const Color regularTextColor = Color(0xFFBCC4DC);
   static const Color green = Color(0xFF00BA88);
+  static const Color lightGreen = Color(0xFF38C660);
   static const Color yellow = Color(0xFFF4B740);
   static const Color labelColorLightThemePrimary = Color(0xFF3D4766);
   static const Color orange = Color(0xFFFD571A);
@@ -16,4 +17,5 @@ abstract class AppColors {
   static const Color grey = Color(0xFF3C3C43);
   static const Color darkBlueDim = Color(0xFF383B65);
   static const Color burgundy = Color(0xFFAB1438);
+  static const Color titleColor = Color(0xFF242424);
 }

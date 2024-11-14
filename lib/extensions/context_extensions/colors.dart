@@ -37,6 +37,12 @@ extension BuildContextEntension<T> on BuildContext {
 
   Color get tertiary => Theme.of(this).colorScheme.tertiary;
 
+  Color get lightGreen => Theme.of(this).colorScheme.tertiaryFixed;
+
+  Color get titleColor => Theme.of(this).colorScheme.surfaceTint;
+
+  Color get black => Theme.of(this).colorScheme.surfaceContainerLowest;
+
   Color get tertiaryContainer => Theme.of(this).colorScheme.tertiaryContainer;
 
   Color get transparent => Theme.of(this).colorScheme.inverseSurface;

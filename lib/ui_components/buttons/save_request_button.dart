@@ -21,6 +21,7 @@ class SaveRequestButton extends ConsumerWidget {
         if (newState == const SuccessState()) {
           showDialog(
             context: context,
+            barrierDismissible: false,
             builder: (context) => PopUpDialog(
               title: 'Request Created',
               message: 'Your request is created and it is currently being reviewed.',

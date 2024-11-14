@@ -23,7 +23,7 @@ class LoginButton extends ConsumerWidget {
     ref.watch(loginStateNotifierProvider);
     final loginStatusNotifier = ref.read(loginStateNotifierProvider.notifier);
     var userCredentials = createUserCredentials();
-    ref.listen(loginStateNotifierProvider, (RequestState? previousState, RequestState newState) {
+    ref.listen(loginStateNotifierProvider, (_, RequestState newState) {
       if (newState == const ErrorState()) {
         showDialog(
           context: context,

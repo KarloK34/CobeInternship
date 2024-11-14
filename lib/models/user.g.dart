@@ -23,13 +23,14 @@ class UserAdapter extends TypeAdapter<User> {
       fields[3] as Role,
       fields[4] as String,
       fields[5] as ConnectionStatus,
+      fields[7] as bool?,
     )..currentLeaveType = fields[6] as LeaveType?;
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -43,7 +44,9 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(5)
       ..write(obj.status)
       ..writeByte(6)
-      ..write(obj.currentLeaveType);
+      ..write(obj.currentLeaveType)
+      ..writeByte(7)
+      ..write(obj._isAdmin);
   }
 
   @override

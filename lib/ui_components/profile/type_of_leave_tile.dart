@@ -20,7 +20,7 @@ class TypeOfLeaveTile extends StatelessWidget {
     String formattedEndDate = DateFormat('MMM dd').format(request.endDate);
 
     return Container(
-      margin: const EdgeInsets.only(left: 16, right: 16, bottom: 14),
+      margin: EdgeInsets.only(right: 12),
       padding: const EdgeInsets.only(top: 15, left: 14, bottom: 12, right: 12),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -47,19 +47,26 @@ class TypeOfLeaveTile extends StatelessWidget {
                 MyChip(
                   chipType: ChipType.request,
                   requestStatus: request.status,
+                  borderRadius: 8,
                 ),
+                SizedBox(width: 166),
                 Container(
+                  height: 38,
+                  width: 38,
                   decoration: BoxDecoration(
                     color: context.backgroundDim,
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(6.0),
                   ),
-                  child: IconButton(
-                      color: context.primary,
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(context.backgroundDim),
-                      ),
-                      onPressed: () {},
-                      icon: const Icon(Icons.arrow_forward)),
+                  child: Center(
+                    child: IconButton(
+                        iconSize: 19,
+                        color: context.primary,
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(context.backgroundDim),
+                        ),
+                        onPressed: () {},
+                        icon: const Icon(Icons.arrow_forward)),
+                  ),
                 ),
               ],
             ),
