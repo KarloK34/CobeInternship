@@ -77,7 +77,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with WidgetsBindingObse
           ),
           if (isFabExtended) ...[
             GestureDetector(
-              onTap: () => ref.read(fabStateProvider.notifier).state = !ref.read(fabStateProvider.notifier).state,
+              onTap: () => ref.read(fabStateProvider.notifier).update((e) => !e),
               child: Container(
                 color: context.black.withOpacity(0.5),
               ),

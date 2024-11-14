@@ -1,5 +1,8 @@
+import 'package:first_project/enums/leave_request_status.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
+import 'package:first_project/extensions/string_extensions.dart';
+import 'package:first_project/models/leave_request.dart';
 import 'package:first_project/providers/notifier_providers/all_users_notifier_provider.dart';
 import 'package:first_project/providers/notifier_providers/approved_request_notifier_provider.dart';
 import 'package:first_project/providers/notifier_providers/pending_requests_notifier_provider.dart';
@@ -8,6 +11,7 @@ import 'package:first_project/screens/approved_requests_screen.dart';
 import 'package:first_project/ui_components/request_board/admin_type_of_leave_tile.dart';
 import 'package:first_project/ui_components/buttons/add_button.dart';
 import 'package:first_project/ui_components/shareable/request_state.dart';
+import 'package:first_project/ui_components/toast.dart';
 import 'package:first_project/utilities/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,12 +26,26 @@ class RequestBoardScreen extends ConsumerWidget {
     ref.listen(
       updateRequestNotifierProvider,
       (_, RequestState newState) {
-        if (newState == const SuccessState()) {
+        if (newState is SuccessState) {
           ref.read(pendingRequestsNotifierProvider.notifier).refresh();
           ref.read(approvedRequestsNotifierProvider.notifier).refresh();
+          final request = newState.data as LeaveRequest;
+          final status = request.status;
+          if (status != LeaveRequestStatus.pending) {
+            CustomToast.show(
+              context,
+              status.name.capitalize(),
+              status == LeaveRequestStatus.approved ? Icons.check : Icons.close,
+              status == LeaveRequestStatus.approved ? context.tertiary : context.errorColor,
+              () {
+                ref.read(updateRequestNotifierProvider.notifier).update(request, LeaveRequestStatus.pending);
+              },
+            );
+          }
         }
       },
     );
+
     final pendingRequests = ref.watch(pendingRequestsNotifierProvider);
     final allUsers = ref.watch(allUsersNotifierProvider);
     return Scaffold(

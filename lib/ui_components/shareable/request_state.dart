@@ -10,8 +10,9 @@ class LoadingState extends RequestState {
   const LoadingState();
 }
 
-class SuccessState extends RequestState {
-  const SuccessState();
+class SuccessState<T> extends RequestState {
+  final T? data;
+  const SuccessState([this.data]);
 }
 
 class ErrorState extends RequestState {

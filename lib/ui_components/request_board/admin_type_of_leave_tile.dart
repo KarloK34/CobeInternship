@@ -70,7 +70,7 @@ class AdminTypeOfLeaveTile extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () {
-                    ref.read(updateRequestNotifierProvider.notifier).update(request, LeaveRequestStatus.rejected, context);
+                    ref.read(updateRequestNotifierProvider.notifier).update(request, LeaveRequestStatus.rejected);
                   },
                   child: Text(
                     'Reject',
@@ -88,7 +88,7 @@ class AdminTypeOfLeaveTile extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () {
-                    ref.read(updateRequestNotifierProvider.notifier).update(request, LeaveRequestStatus.approved, context);
+                    ref.read(updateRequestNotifierProvider.notifier).update(request, LeaveRequestStatus.approved);
                   },
                   child: Text(
                     'Approve',
