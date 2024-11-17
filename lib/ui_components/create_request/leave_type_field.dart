@@ -1,17 +1,17 @@
+import 'package:first_project/cubits/form_state_cubit.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/extensions/string_extensions.dart';
-import 'package:first_project/providers/notifier_providers/form_state_notifier_provider.dart';
 import 'package:first_project/ui_components/create_request/leave_type_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LeaveTypeField extends ConsumerWidget {
+class LeaveTypeField extends StatelessWidget {
   const LeaveTypeField({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final leaveType = ref.watch(formStateNotifierProvider.select((form) => form.leaveType));
+  Widget build(BuildContext context) {
+    final leaveType = context.watch<FormStateCubit>().state.leaveType;
     return GestureDetector(
       onTap: () {
         showDialog(

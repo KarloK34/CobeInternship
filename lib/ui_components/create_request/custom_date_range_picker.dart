@@ -1,18 +1,18 @@
+import 'package:first_project/cubits/form_state_cubit.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/providers/notifier_providers/form_state_notifier_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class CustomDateRangePickerDialog extends ConsumerStatefulWidget {
+class CustomDateRangePickerDialog extends StatefulWidget {
   const CustomDateRangePickerDialog({super.key});
 
   @override
-  _CustomDateRangePickerDialogState createState() => _CustomDateRangePickerDialogState();
+  State<CustomDateRangePickerDialog> createState() => _CustomDateRangePickerDialogState();
 }
 
-class _CustomDateRangePickerDialogState extends ConsumerState<CustomDateRangePickerDialog> {
+class _CustomDateRangePickerDialogState extends State<CustomDateRangePickerDialog> {
   DateTime _currentDate = DateTime.now();
   DateTime? _startDate;
   DateTime? _endDate;
@@ -183,7 +183,7 @@ class _CustomDateRangePickerDialogState extends ConsumerState<CustomDateRangePic
                       backgroundColor: WidgetStatePropertyAll(context.secondary),
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)))),
                   onPressed: () {
-                    ref.read(formStateNotifierProvider.notifier).setDate(startDate: _startDate, endDate: _endDate);
+                    context.read<FormStateCubit>().setDate(startDate: _startDate, endDate: _endDate);
                     Navigator.pop(context);
                   },
                   child: const Text('Save'),

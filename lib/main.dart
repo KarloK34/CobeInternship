@@ -1,3 +1,11 @@
+import 'package:first_project/cubits/all_requests_cubit.dart';
+import 'package:first_project/cubits/all_users_cubit.dart';
+import 'package:first_project/cubits/approved_request_cubit.dart';
+import 'package:first_project/cubits/create_request_cubit.dart';
+import 'package:first_project/cubits/fab_cubit.dart';
+import 'package:first_project/cubits/form_state_cubit.dart';
+import 'package:first_project/cubits/pending_request_cubit.dart';
+import 'package:first_project/cubits/user_cubit.dart';
 import 'package:first_project/enums/connection_status.dart';
 import 'package:first_project/enums/leave_request_status.dart';
 import 'package:first_project/enums/leave_type.dart';
@@ -16,9 +24,13 @@ import 'package:first_project/screens/splash_screen.dart';
 import 'package:first_project/utilities/app_images.dart';
 import 'package:first_project/utilities/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+
+final getIt = GetIt.instance;
 
 void registerHiveAdapters() {
   Hive.registerAdapter(LeaveTypeAdapter());
@@ -43,6 +55,7 @@ void main() async {
   await requestBox.clear();
   createUsers();
   createRequests();
+  getIt.registerSingleton<UserCubit>(UserCubit());
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -51,10 +64,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme.lightTheme,
-      initialRoute: SplashScreen.routeName,
-      onGenerateRoute: generateRoute,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<UserCubit>()),
+        BlocProvider(create: (context) => FabCubit()),
+        BlocProvider(create: (context) => AllUsersCubit()..loadUsers()),
+        BlocProvider(create: (context) => AllRequestsCubit()..loadRequests()),
+        BlocProvider(create: (context) => ApprovedRequestCubit(context.read<AllRequestsCubit>())),
+        BlocProvider(create: (context) => PendingRequestCubit(context.read<AllRequestsCubit>())),
+        BlocProvider(create: (context) => FormStateCubit()),
+        BlocProvider(
+          create: (context) => CreateRequestCubit(
+            context.read<FormStateCubit>(),
+            context.read<AllRequestsCubit>(),
+            context.read<PendingRequestCubit>(),
+          ),
+        ),
+      ],
+      child: MaterialApp(
+        theme: AppTheme.lightTheme,
+        initialRoute: SplashScreen.routeName,
+        onGenerateRoute: generateRoute,
+      ),
     );
   }
 }
@@ -66,6 +97,7 @@ List<User> createUsers() {
     final users = [
       User(1, 'Karlo', 'Kraml', Role.student, AppImages.dummyProfile, ConnectionStatus.online, true),
       User(2, 'Stela', 'Kraml', Role.student, AppImages.dummyProfile2, ConnectionStatus.offline),
+      User(3, 'Davor', 'Štajcer', Role.employee, AppImages.dummyProfile, ConnectionStatus.offline),
     ];
 
     for (var user in users) {
@@ -79,11 +111,13 @@ List<User> createUsers() {
 Map<User, EmailAndPassword> createUserCredentials() {
   var userBox = Hive.box<User>('userBox');
   User Karlo = userBox.values.first;
-  User Stela = userBox.values.last;
+  User Stela = userBox.values.elementAt(1);
+  User Davor = userBox.values.elementAt(2);
 
   Map<User, EmailAndPassword> userCredentials = {
     Karlo: EmailAndPassword('karlo.kraml@gmail.com', 'karlo123'),
     Stela: EmailAndPassword('stela.vlasic@gmail.com', 'stela123'),
+    Davor: EmailAndPassword('davor.stajcer@gmail.com', 'davor123'),
   };
 
   return userCredentials;

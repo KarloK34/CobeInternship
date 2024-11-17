@@ -1,18 +1,18 @@
+import 'package:first_project/cubits/form_state_cubit.dart';
 import 'package:first_project/enums/leave_type.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/extensions/string_extensions.dart';
-import 'package:first_project/providers/notifier_providers/form_state_notifier_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LeaveTypeDialog extends ConsumerWidget {
+class LeaveTypeDialog extends StatelessWidget {
   const LeaveTypeDialog({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       backgroundColor: context.onSecondary,
@@ -31,7 +31,7 @@ class LeaveTypeDialog extends ConsumerWidget {
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
                       side: WidgetStatePropertyAll(BorderSide(color: context.onBackgroundVariant))),
                   onPressed: () {
-                    ref.read(formStateNotifierProvider.notifier).setLeaveType(LeaveType.values[index]);
+                    context.read<FormStateCubit>().setLeaveType(LeaveType.values[index]);
                     Navigator.pop(context);
                   },
                   child: Text(

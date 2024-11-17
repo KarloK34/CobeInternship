@@ -1,20 +1,20 @@
+import 'package:first_project/cubits/email_cubit.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
-import 'package:first_project/providers/state_providers/email_state_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-class EmailTextField extends ConsumerWidget {
+class EmailTextField extends StatelessWidget {
   const EmailTextField({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return FormBuilderTextField(
       name: 'email',
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.white,
+        fillColor: context.onSecondary,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -30,7 +30,7 @@ class EmailTextField extends ConsumerWidget {
       ),
       onChanged: (value) {
         if (value != null) {
-          ref.read(emailStateProvider.notifier).state = value;
+          context.read<EmailCubit>().updateEmail(value);
         }
       },
     );

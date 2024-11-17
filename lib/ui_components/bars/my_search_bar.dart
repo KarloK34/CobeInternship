@@ -1,19 +1,19 @@
+import 'package:first_project/cubits/search_query_cubit.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/providers/notifier_providers/search_query_notifier_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MySearchBar extends ConsumerStatefulWidget {
+class MySearchBar extends StatefulWidget {
   const MySearchBar({
     super.key,
   });
 
   @override
-  ConsumerState<MySearchBar> createState() => _MySearchBarState();
+  State<MySearchBar> createState() => _MySearchBarState();
 }
 
-class _MySearchBarState extends ConsumerState<MySearchBar> {
+class _MySearchBarState extends State<MySearchBar> {
   late TextEditingController _controller;
 
   @override
@@ -23,7 +23,7 @@ class _MySearchBarState extends ConsumerState<MySearchBar> {
 
     _controller.addListener(() {
       final query = _controller.text;
-      ref.read(searchQueryNotifierProvider.notifier).updateSearchQuery(query);
+      context.read<SearchQueryCubit>().updateSearchQuery(query);
     });
   }
 
@@ -50,7 +50,7 @@ class _MySearchBarState extends ConsumerState<MySearchBar> {
       hintStyle: WidgetStatePropertyAll(
         context.labelMedium!.copyWith(color: context.onBackgroundVariant),
       ),
-      backgroundColor: const WidgetStatePropertyAll(Colors.white),
+      backgroundColor: WidgetStatePropertyAll(context.onSecondary),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),

@@ -8,18 +8,17 @@ import 'package:first_project/ui_components/create_request/date_span_field.dart'
 import 'package:first_project/ui_components/create_request/leave_type_field.dart';
 import 'package:first_project/ui_components/create_request/reason_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CreateRequestScreen extends ConsumerStatefulWidget {
+class CreateRequestScreen extends StatefulWidget {
   static const routeName = '/createRequest';
 
   const CreateRequestScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _CreateRequestScreenState();
+  State<StatefulWidget> createState() => _CreateRequestScreenState();
 }
 
-class _CreateRequestScreenState extends ConsumerState<CreateRequestScreen> {
+class _CreateRequestScreenState extends State<CreateRequestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,8 +58,8 @@ class _CreateRequestScreenState extends ConsumerState<CreateRequestScreen> {
               style: context.bodyMedium,
             ),
           ),
-          EveryoneRadioButton(ref: ref),
-          AdminRadioButton(ref: ref),
+          EveryoneRadioButton(),
+          AdminRadioButton(),
           const SizedBox(height: 107),
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,

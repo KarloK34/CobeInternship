@@ -1,14 +1,14 @@
+import 'package:first_project/cubits/selected_filters_cubit.dart';
 import 'package:first_project/enums/chip_type.dart';
 import 'package:first_project/enums/connection_status.dart';
 import 'package:first_project/enums/leave_request_status.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/extensions/string_extensions.dart';
-import 'package:first_project/providers/notifier_providers/selected_filters_notifier_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MyChip extends ConsumerWidget {
+class MyChip extends StatelessWidget {
   final ChipType chipType;
   final LeaveRequestStatus? requestStatus;
   final ConnectionStatus? connectionStatus;
@@ -18,14 +18,14 @@ class MyChip extends ConsumerWidget {
   const MyChip({super.key, required this.chipType, this.requestStatus, this.connectionStatus, this.label, this.borderRadius = 12.0});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     String chipLabel;
     Color chipColor;
     Color labelColor;
     Color borderColor;
     final regularTextColor = context.onBackgroundVariant;
     final backgroundColor = context.background;
-    const white = Colors.white;
+    var white = context.onSecondary;
 
     switch (chipType) {
       case ChipType.request:
@@ -41,8 +41,7 @@ class MyChip extends ConsumerWidget {
         break;
       case ChipType.regular:
         chipLabel = label ?? 'Chip';
-        chipColor =
-            ref.watch(selectedFiltersNotifierProvider.select((e) => e.contains(chipLabel))) ? _getRegularChipColor(context, chipLabel) : backgroundColor;
+        chipColor = context.watch<SelectedFiltersCubit>().containsFilter(chipLabel) ? _getRegularChipColor(context, chipLabel) : backgroundColor;
         labelColor = borderColor = chipColor != backgroundColor ? white : regularTextColor;
         break;
     }
@@ -73,7 +72,7 @@ class MyChip extends ConsumerWidget {
       case 'Sick':
         return context.errorContainer;
       default:
-        return Colors.transparent;
+        return context.transparent;
     }
   }
 
@@ -86,7 +85,7 @@ class MyChip extends ConsumerWidget {
       case LeaveRequestStatus.rejected:
         return context.secondary;
       default:
-        return Colors.grey;
+        return context.tertiaryContainer;
     }
   }
 
@@ -95,9 +94,9 @@ class MyChip extends ConsumerWidget {
       case ConnectionStatus.online:
         return context.tertiary;
       case ConnectionStatus.offline:
-        return Colors.white;
+        return context.onSecondary;
       default:
-        return Colors.grey;
+        return context.tertiaryContainer;
     }
   }
 }

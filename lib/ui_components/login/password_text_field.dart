@@ -1,20 +1,20 @@
+import 'package:first_project/cubits/password_cubit.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
-import 'package:first_project/providers/state_providers/password_state_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-class PasswordTextField extends ConsumerStatefulWidget {
+class PasswordTextField extends StatefulWidget {
   const PasswordTextField({
     super.key,
   });
 
   @override
-  ConsumerState<PasswordTextField> createState() => _PasswordTextFieldState();
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
 }
 
-class _PasswordTextFieldState extends ConsumerState<PasswordTextField> {
+class _PasswordTextFieldState extends State<PasswordTextField> {
   bool _isObscure = true;
 
   void _toggleVisibility() {
@@ -30,7 +30,7 @@ class _PasswordTextFieldState extends ConsumerState<PasswordTextField> {
         obscureText: _isObscure,
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: context.onSecondary,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
@@ -49,7 +49,7 @@ class _PasswordTextFieldState extends ConsumerState<PasswordTextField> {
         ]),
         onChanged: (value) {
           if (value != null) {
-            ref.read(passwordStateProvider.notifier).state = value;
+            context.read<PasswordCubit>().updatePassword(value);
           }
         });
   }

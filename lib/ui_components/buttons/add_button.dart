@@ -1,33 +1,35 @@
+import 'package:first_project/cubits/fab_cubit.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
-import 'package:first_project/providers/state_providers/fab_state_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddButton extends ConsumerWidget {
+class AddButton extends StatelessWidget {
   const AddButton({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isFabExtended = ref.watch(fabStateProvider);
-
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 48, right: 31),
       height: 54,
       width: 54,
-      child: FloatingActionButton(
-        backgroundColor: context.secondary,
-        foregroundColor: context.onSecondary,
-        shape: const CircleBorder(),
-        heroTag: 'uniqueTag',
-        onPressed: () {
-          ref.read(fabStateProvider.notifier).state = !ref.read(fabStateProvider.notifier).state;
+      child: BlocBuilder<FabCubit, bool>(
+        builder: (context, state) {
+          return FloatingActionButton(
+            backgroundColor: context.secondary,
+            foregroundColor: context.onSecondary,
+            shape: const CircleBorder(),
+            heroTag: 'uniqueTag',
+            onPressed: () {
+              context.read<FabCubit>().toggle();
+            },
+            child: Icon(
+              state ? Icons.close : Icons.add,
+              size: 35,
+            ),
+          );
         },
-        child: Icon(
-          isFabExtended ? Icons.close : Icons.add,
-          size: 35,
-        ),
       ),
     );
   }

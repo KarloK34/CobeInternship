@@ -1,22 +1,18 @@
+import 'package:first_project/cubits/form_state_cubit.dart';
 import 'package:first_project/enums/request_visibility.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/providers/notifier_providers/form_state_notifier_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:first_project/models/form_state.dart';
+import 'package:flutter/material.dart' hide FormState;
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EveryoneRadioButton extends StatelessWidget {
   const EveryoneRadioButton({
     super.key,
-    required this.ref,
   });
-
-  final WidgetRef ref;
 
   @override
   Widget build(BuildContext context) {
-    final visibility = ref.watch(formStateNotifierProvider.select((e) => e.visibility));
-
     return Container(
       width: MediaQuery.of(context).size.width * 0.9,
       margin: const EdgeInsets.only(left: 17.0, top: 17.0, right: 14.0),
@@ -46,13 +42,20 @@ class EveryoneRadioButton extends StatelessWidget {
                   ),
                 ],
               ),
-              Radio(
-                value: RequestVisibility.everyone,
-                groupValue: visibility,
-                onChanged: (RequestVisibility? value) {
-                  ref.read(formStateNotifierProvider.notifier).setVisibility(value!);
+              BlocSelector<FormStateCubit, FormState, RequestVisibility>(
+                selector: (state) {
+                  return state.visibility;
                 },
-                fillColor: WidgetStatePropertyAll(context.primaryColorDark),
+                builder: (context, visibility) {
+                  return Radio(
+                    value: RequestVisibility.everyone,
+                    groupValue: visibility,
+                    onChanged: (RequestVisibility? value) {
+                      context.read<FormStateCubit>().setVisibility(value!);
+                    },
+                    fillColor: WidgetStatePropertyAll(context.primaryColorDark),
+                  );
+                },
               )
             ],
           )),

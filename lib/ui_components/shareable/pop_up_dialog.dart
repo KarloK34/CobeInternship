@@ -1,9 +1,8 @@
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PopUpDialog extends ConsumerWidget {
+class PopUpDialog extends StatelessWidget {
   final String title;
   final String message;
   final void Function() onPressed;
@@ -15,7 +14,7 @@ class PopUpDialog extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: context.onSecondary,
       title: Center(

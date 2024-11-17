@@ -1,15 +1,15 @@
+import 'package:first_project/cubits/update_request_status_cubit.dart';
 import 'package:first_project/enums/leave_request_status.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/extensions/string_extensions.dart';
 import 'package:first_project/models/leave_request.dart';
 import 'package:first_project/models/user.dart';
-import 'package:first_project/providers/notifier_providers/update_request_notifier_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-class AdminTypeOfLeaveTile extends ConsumerWidget {
+class AdminTypeOfLeaveTile extends StatelessWidget {
   final LeaveRequest request;
   final User user;
   const AdminTypeOfLeaveTile({
@@ -19,7 +19,7 @@ class AdminTypeOfLeaveTile extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     String formattedStartDate = DateFormat('MMM dd').format(request.startDate);
     String formattedEndDate = DateFormat('MMM dd').format(request.endDate);
 
@@ -70,7 +70,7 @@ class AdminTypeOfLeaveTile extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () {
-                    ref.read(updateRequestNotifierProvider.notifier).update(request, LeaveRequestStatus.rejected);
+                    context.read<UpdateRequestStatusCubit>().updateStatus(request, LeaveRequestStatus.rejected);
                   },
                   child: Text(
                     'Reject',
@@ -88,7 +88,7 @@ class AdminTypeOfLeaveTile extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () {
-                    ref.read(updateRequestNotifierProvider.notifier).update(request, LeaveRequestStatus.approved);
+                    context.read<UpdateRequestStatusCubit>().updateStatus(request, LeaveRequestStatus.approved);
                   },
                   child: Text(
                     'Approve',
