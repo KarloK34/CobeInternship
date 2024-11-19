@@ -14,7 +14,7 @@ class DateSpanField extends StatelessWidget {
     return GestureDetector(
       onTap: () => showDialog(
         context: context,
-        builder: (context) => const CustomDateRangePickerDialog(),
+        builder: (_) => CustomDateRangePickerDialog(parentContext: context),
       ),
       child: Container(
         height: 42,

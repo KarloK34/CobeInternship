@@ -1,16 +1,14 @@
 import 'package:first_project/cubits/all_requests_cubit.dart';
 import 'package:first_project/cubits/all_users_cubit.dart';
 import 'package:first_project/cubits/approved_request_cubit.dart';
-import 'package:first_project/cubits/create_request_cubit.dart';
 import 'package:first_project/cubits/fab_cubit.dart';
-import 'package:first_project/cubits/form_state_cubit.dart';
 import 'package:first_project/cubits/pending_request_cubit.dart';
-import 'package:first_project/cubits/user_cubit.dart';
 import 'package:first_project/enums/connection_status.dart';
 import 'package:first_project/enums/leave_request_status.dart';
 import 'package:first_project/enums/leave_type.dart';
 import 'package:first_project/enums/request_visibility.dart';
 import 'package:first_project/enums/role.dart';
+import 'package:first_project/get_it/get_it.dart';
 import 'package:first_project/hive_adapters/connection_status_adapter.dart';
 import 'package:first_project/hive_adapters/leave_request_status_adapter.dart';
 import 'package:first_project/hive_adapters/leave_type_adapter.dart';
@@ -26,11 +24,8 @@ import 'package:first_project/utilities/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-
-final getIt = GetIt.instance;
 
 void registerHiveAdapters() {
   Hive.registerAdapter(LeaveTypeAdapter());
@@ -55,7 +50,7 @@ void main() async {
   await requestBox.clear();
   createUsers();
   createRequests();
-  getIt.registerSingleton<UserCubit>(UserCubit());
+  configureDependencies();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -66,20 +61,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => getIt<UserCubit>()),
         BlocProvider(create: (context) => FabCubit()),
         BlocProvider(create: (context) => AllUsersCubit()..loadUsers()),
         BlocProvider(create: (context) => AllRequestsCubit()..loadRequests()),
         BlocProvider(create: (context) => ApprovedRequestCubit(context.read<AllRequestsCubit>())),
         BlocProvider(create: (context) => PendingRequestCubit(context.read<AllRequestsCubit>())),
-        BlocProvider(create: (context) => FormStateCubit()),
-        BlocProvider(
-          create: (context) => CreateRequestCubit(
-            context.read<FormStateCubit>(),
-            context.read<AllRequestsCubit>(),
-            context.read<PendingRequestCubit>(),
-          ),
-        ),
       ],
       child: MaterialApp(
         theme: AppTheme.lightTheme,

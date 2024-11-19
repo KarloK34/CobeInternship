@@ -6,7 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class CustomDateRangePickerDialog extends StatefulWidget {
-  const CustomDateRangePickerDialog({super.key});
+  final BuildContext parentContext;
+
+  const CustomDateRangePickerDialog({
+    super.key,
+    required this.parentContext,
+  });
 
   @override
   State<CustomDateRangePickerDialog> createState() => _CustomDateRangePickerDialogState();
@@ -183,7 +188,7 @@ class _CustomDateRangePickerDialogState extends State<CustomDateRangePickerDialo
                       backgroundColor: WidgetStatePropertyAll(context.secondary),
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)))),
                   onPressed: () {
-                    context.read<FormStateCubit>().setDate(startDate: _startDate, endDate: _endDate);
+                    widget.parentContext.read<FormStateCubit>().setDate(startDate: _startDate, endDate: _endDate);
                     Navigator.pop(context);
                   },
                   child: const Text('Save'),

@@ -1,9 +1,9 @@
 import 'package:first_project/cubits/all_requests_cubit.dart';
 import 'package:first_project/cubits/form_state_cubit.dart';
 import 'package:first_project/cubits/pending_request_cubit.dart';
-import 'package:first_project/cubits/user_cubit.dart';
+import 'package:first_project/cubits/singletons/user_cubit.dart';
 import 'package:first_project/enums/leave_request_status.dart';
-import 'package:first_project/main.dart';
+import 'package:first_project/get_it/get_it.dart';
 import 'package:first_project/models/leave_request.dart';
 import 'package:first_project/ui_components/shareable/request_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,6 +33,5 @@ class CreateRequestCubit extends Cubit<RequestState> {
     allRequestsCubit.addRequest(LeaveRequest(user!.id, startDate!, endDate!, type, visibility, reason, LeaveRequestStatus.pending));
     pendingRequestCubit.refresh();
     emit(const SuccessState());
-    formStateCubit.reset();
   }
 }

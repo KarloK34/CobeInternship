@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LeaveTypeDialog extends StatelessWidget {
+  final BuildContext parentContext;
+
   const LeaveTypeDialog({
     super.key,
+    required this.parentContext,
   });
 
   @override
@@ -31,7 +34,7 @@ class LeaveTypeDialog extends StatelessWidget {
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
                       side: WidgetStatePropertyAll(BorderSide(color: context.onBackgroundVariant))),
                   onPressed: () {
-                    context.read<FormStateCubit>().setLeaveType(LeaveType.values[index]);
+                    parentContext.read<FormStateCubit>().setLeaveType(LeaveType.values[index]);
                     Navigator.pop(context);
                   },
                   child: Text(

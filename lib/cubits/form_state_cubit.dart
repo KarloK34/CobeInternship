@@ -21,8 +21,4 @@ class FormStateCubit extends Cubit<FormState> {
   void setDate({DateTime? startDate, DateTime? endDate}) {
     emit(state.copyWith(startDate: startDate, endDate: endDate));
   }
-
-  void reset() {
-    emit(FormState());
-  }
 }

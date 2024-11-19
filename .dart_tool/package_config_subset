@@ -162,6 +162,14 @@ http_parser
 2.12
 file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/http_parser-4.0.2/
 file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/http_parser-4.0.2/lib/
+injectable
+3.0
+file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/injectable-2.5.0/
+file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/injectable-2.5.0/lib/
+injectable_generator
+3.0
+file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/injectable_generator-2.6.2/
+file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/injectable_generator-2.6.2/lib/
 intl
 3.0
 file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/intl-0.19.0/
@@ -282,6 +290,10 @@ pubspec_parse
 3.0
 file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/pubspec_parse-1.3.0/
 file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/pubspec_parse-1.3.0/lib/
+recase
+2.12
+file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/recase-4.1.0/
+file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/recase-4.1.0/lib/
 riverpod
 2.17
 file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/riverpod-2.6.1/

@@ -1,13 +1,12 @@
 import 'package:first_project/cubits/all_users_cubit.dart';
-import 'package:first_project/cubits/app_lifecycle_cubit.dart';
+import 'package:first_project/cubits/singletons/app_lifecycle_cubit.dart';
 import 'package:first_project/cubits/fab_cubit.dart';
 import 'package:first_project/cubits/filtered_users_cubit.dart';
-import 'package:first_project/cubits/pending_request_cubit.dart';
 import 'package:first_project/cubits/search_query_cubit.dart';
 import 'package:first_project/cubits/selected_filters_cubit.dart';
-import 'package:first_project/cubits/user_cubit.dart';
+import 'package:first_project/cubits/singletons/user_cubit.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
-import 'package:first_project/main.dart';
+import 'package:first_project/get_it/get_it.dart';
 import 'package:first_project/ui_components/buttons/add_absence_button.dart';
 import 'package:first_project/ui_components/buttons/add_button.dart';
 import 'package:first_project/ui_components/buttons/create_request_button.dart';
@@ -38,10 +37,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
-      context.read<AppLifecycleCubit>().onAppPaused();
+      getIt<AppLifecycleCubit>().onAppPaused();
       return;
     }
-    if (state == AppLifecycleState.resumed) context.read<AppLifecycleCubit>().onAppResumed(context);
+    if (state == AppLifecycleState.resumed) getIt<AppLifecycleCubit>().onAppResumed(context);
   }
 
   @override
@@ -53,10 +52,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final user = getIt<UserCubit>().state;
-    final pendingRequests = context.watch<PendingRequestCubit>().state;
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AppLifecycleCubit()),
         BlocProvider(create: (context) => SelectedFiltersCubit()),
         BlocProvider(create: (context) => SearchQueryCubit()),
         BlocProvider(
@@ -80,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     child: Column(
                       children: [
                         MyAppBar(),
-                        if (user != null && user.isAdmin) ManageRequestsList(pendingRequests: pendingRequests),
+                        if (user != null && user.isAdmin) ManageRequestsList(),
                         SizedBox(height: 22),
                         MySearchBar(),
                         SizedBox(height: 10),

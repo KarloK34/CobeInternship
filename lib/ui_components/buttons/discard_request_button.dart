@@ -1,8 +1,6 @@
-import 'package:first_project/cubits/form_state_cubit.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DiscardRequestButton extends StatelessWidget {
   const DiscardRequestButton({
@@ -21,7 +19,6 @@ class DiscardRequestButton extends StatelessWidget {
             )),
         onPressed: () {
           Navigator.pop(context);
-          context.read<FormStateCubit>().reset();
         },
         child: Text(
           'Discard',

@@ -1,5 +1,5 @@
-import 'package:first_project/cubits/user_cubit.dart';
-import 'package:first_project/main.dart';
+import 'package:first_project/cubits/singletons/user_cubit.dart';
+import 'package:first_project/get_it/get_it.dart';
 import 'package:first_project/models/email_and_password.dart';
 import 'package:first_project/models/user.dart';
 import 'package:first_project/ui_components/shareable/request_state.dart';

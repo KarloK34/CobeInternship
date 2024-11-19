@@ -272,6 +272,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "injectable",
+      "rootUri": "file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/injectable-2.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "injectable_generator",
+      "rootUri": "file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/injectable_generator-2.6.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "intl",
       "rootUri": "file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/intl-0.19.0",
       "packageUri": "lib/",
@@ -452,6 +464,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "recase",
+      "rootUri": "file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/recase-4.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "riverpod",
       "rootUri": "file:///Users/cobepraksa2/.pub-cache/hosted/pub.dev/riverpod-2.6.1",
       "packageUri": "lib/",
@@ -614,7 +632,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-11-14T15:16:48.437941Z",
+  "generated": "2024-11-19T15:12:11.534675Z",
   "generator": "pub",
   "generatorVersion": "3.5.3",
   "flutterRoot": "file:///Users/cobepraksa2/development/flutter",

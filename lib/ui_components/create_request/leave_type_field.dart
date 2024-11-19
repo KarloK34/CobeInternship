@@ -16,7 +16,7 @@ class LeaveTypeField extends StatelessWidget {
       onTap: () {
         showDialog(
           context: context,
-          builder: (context) => const LeaveTypeDialog(),
+          builder: (_) => LeaveTypeDialog(parentContext: context),
         );
       },
       child: Container(
