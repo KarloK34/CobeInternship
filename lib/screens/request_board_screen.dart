@@ -1,5 +1,5 @@
+import 'package:first_project/cubits/all_requests_cubit.dart';
 import 'package:first_project/cubits/all_users_cubit.dart';
-import 'package:first_project/cubits/approved_request_cubit.dart';
 import 'package:first_project/cubits/pending_request_cubit.dart';
 import 'package:first_project/cubits/update_request_status_cubit.dart';
 import 'package:first_project/enums/leave_request_status.dart';
@@ -28,8 +28,7 @@ class RequestBoardScreen extends StatelessWidget {
     return BlocListener<UpdateRequestStatusCubit, RequestState>(
       listener: (context, state) {
         if (state is SuccessState) {
-          context.read<PendingRequestCubit>().refresh();
-          context.read<ApprovedRequestCubit>().refresh();
+          context.read<AllRequestsCubit>().loadRequests();
           final request = state.data as LeaveRequest;
           final status = request.status;
           if (status != LeaveRequestStatus.pending) {

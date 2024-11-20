@@ -31,7 +31,6 @@ class CreateRequestCubit extends Cubit<RequestState> {
     final type = form.leaveType;
     final visibility = form.visibility;
     allRequestsCubit.addRequest(LeaveRequest(user!.id, startDate!, endDate!, type, visibility, reason, LeaveRequestStatus.pending));
-    pendingRequestCubit.refresh();
     emit(const SuccessState());
   }
 }

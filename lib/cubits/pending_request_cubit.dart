@@ -11,11 +11,11 @@ class PendingRequestCubit extends Cubit<List<LeaveRequest>> {
   late final StreamSubscription allRequestsSubscription;
 
   PendingRequestCubit(this.allRequestsCubit) : super(allRequestsCubit.state.where((request) => request.status == LeaveRequestStatus.pending).toList()) {
-    allRequestsSubscription = allRequestsCubit.stream.listen((_) => refresh());
-  }
-
-  void refresh() {
-    emit(allRequestsCubit.state.where((request) => request.status == LeaveRequestStatus.pending).toList());
+    allRequestsSubscription = allRequestsCubit.stream.listen(
+      (allRequests) {
+        emit(allRequestsCubit.state.where((request) => request.status == LeaveRequestStatus.pending).toList());
+      },
+    );
   }
 
   @override
