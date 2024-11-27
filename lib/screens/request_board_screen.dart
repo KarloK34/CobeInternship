@@ -1,4 +1,3 @@
-import 'package:first_project/cubits/all_requests_cubit.dart';
 import 'package:first_project/cubits/all_users_cubit.dart';
 import 'package:first_project/cubits/pending_request_cubit.dart';
 import 'package:first_project/cubits/update_request_status_cubit.dart';
@@ -28,7 +27,6 @@ class RequestBoardScreen extends StatelessWidget {
     return BlocListener<UpdateRequestStatusCubit, RequestState>(
       listener: (context, state) {
         if (state is SuccessState) {
-          context.read<AllRequestsCubit>().loadRequests();
           final request = state.data as LeaveRequest;
           final status = request.status;
           if (status != LeaveRequestStatus.pending) {
@@ -42,6 +40,9 @@ class RequestBoardScreen extends StatelessWidget {
               },
             );
           }
+        }
+        if (state is Error) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("looool")));
         }
       },
       child: Scaffold(
@@ -104,9 +105,10 @@ class RequestBoardScreen extends StatelessWidget {
                         child: ListView.builder(
                           itemCount: pendingRequests.length,
                           itemBuilder: (context, index) {
-                            return BlocBuilder<AllUsersCubit, List<User>>(
-                              builder: (context, allUsers) {
-                                final user = allUsers.firstWhere((user) => user.id == pendingRequests[index].userId);
+                            return BlocBuilder<AllUsersCubit, RequestState<List<User>>>(
+                              builder: (context, state) {
+                                final users = state is SuccessState<List<User>> ? state.data : <User>[];
+                                final user = users!.firstWhere((user) => user.id == pendingRequests[index].createdById);
                                 return Column(
                                   children: [
                                     AdminTypeOfLeaveTile(

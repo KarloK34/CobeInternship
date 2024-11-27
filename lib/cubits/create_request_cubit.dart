@@ -2,11 +2,14 @@ import 'package:first_project/cubits/all_requests_cubit.dart';
 import 'package:first_project/cubits/form_state_cubit.dart';
 import 'package:first_project/cubits/pending_request_cubit.dart';
 import 'package:first_project/cubits/singletons/user_cubit.dart';
-import 'package:first_project/enums/leave_request_status.dart';
+import 'package:first_project/services/data_service.dart';
 import 'package:first_project/get_it/get_it.dart';
+import 'package:first_project/models/date.dart';
+import 'package:first_project/models/date_range.dart';
 import 'package:first_project/models/leave_request.dart';
 import 'package:first_project/ui_components/shareable/request_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 class CreateRequestCubit extends Cubit<RequestState> {
   FormStateCubit formStateCubit;
@@ -22,7 +25,6 @@ class CreateRequestCubit extends Cubit<RequestState> {
       return;
     }
     emit(const LoadingState());
-    await Future.delayed(const Duration(seconds: 1));
 
     final user = getIt<UserCubit>().state;
     final startDate = form.startDate;
@@ -30,7 +32,23 @@ class CreateRequestCubit extends Cubit<RequestState> {
     final reason = form.reason;
     final type = form.leaveType;
     final visibility = form.visibility;
-    allRequestsCubit.addRequest(LeaveRequest(user!.id, startDate!, endDate!, type, visibility, reason, LeaveRequestStatus.pending));
-    emit(const SuccessState());
+    final request = LeaveRequest(
+      Uuid().v4(),
+      user!.id,
+      type,
+      reason,
+      visibility,
+      DateRange(
+        start: Date.fromDateTime(startDate!),
+        end: Date.fromDateTime(endDate!),
+      ),
+    );
+    try {
+      await getIt<DataService>().createRequest(request.toJson());
+      allRequestsCubit.loadRequests();
+      emit(const SuccessState());
+    } catch (e) {
+      emit(const ErrorState());
+    }
   }
 }

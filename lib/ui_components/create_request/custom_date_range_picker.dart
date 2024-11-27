@@ -57,7 +57,7 @@ class _CustomDateRangePickerDialogState extends State<CustomDateRangePickerDialo
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
-                  width: 120,
+                  width: 134,
                   child: Text(
                     month,
                     style: context.titleMediumBold,
@@ -68,7 +68,7 @@ class _CustomDateRangePickerDialogState extends State<CustomDateRangePickerDialo
                   year,
                   style: context.labelMedium,
                 ),
-                const SizedBox(width: 25),
+                const SizedBox(width: 15),
                 IconButton(
                   iconSize: 16,
                   color: context.primary,
@@ -90,7 +90,7 @@ class _CustomDateRangePickerDialogState extends State<CustomDateRangePickerDialo
             ),
             const SizedBox(height: 8),
             SizedBox(
-              height: 238,
+              height: 282,
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 7,

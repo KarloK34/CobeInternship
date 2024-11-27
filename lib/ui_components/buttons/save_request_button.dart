@@ -32,6 +32,9 @@ class SaveRequestButton extends StatelessWidget {
             ),
           );
         }
+        if (state == const ErrorState()) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error")));
+        }
       },
       child: SizedBox(
         width: 96,
@@ -45,10 +48,16 @@ class SaveRequestButton extends StatelessWidget {
             if (!isValidInput) return;
             context.read<CreateRequestCubit>().createRequest();
           },
-          child: Text(
-            'Save',
-            style: context.labelMedium!.copyWith(color: context.onSecondary),
-          ),
+          child: BlocBuilder<CreateRequestCubit, RequestState>(builder: (context, state) {
+            return state == const LoadingState()
+                ? CircularProgressIndicator(
+                    color: context.onSecondary,
+                  )
+                : Text(
+                    'Save',
+                    style: context.labelMedium!.copyWith(color: context.onSecondary),
+                  );
+          }),
         ),
       ),
     );

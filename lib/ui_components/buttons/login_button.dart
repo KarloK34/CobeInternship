@@ -3,7 +3,6 @@ import 'package:first_project/cubits/login_state_cubit.dart';
 import 'package:first_project/cubits/password_cubit.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/main.dart';
 import 'package:first_project/ui_components/shareable/request_state.dart';
 import 'package:first_project/screens/home_screen.dart';
 import 'package:first_project/ui_components/shareable/pop_up_dialog.dart';
@@ -20,7 +19,6 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var userCredentials = createUserCredentials();
     return BlocListener<LoginStateCubit, RequestState>(
       listener: (context, state) {
         if (state == const ErrorState()) {
@@ -64,7 +62,6 @@ class LoginButton extends StatelessWidget {
             context.read<LoginStateCubit>().handleLogin(
                   formKey: formKey,
                   context: context,
-                  userCredentials: userCredentials,
                   email: email,
                   password: password,
                 );
