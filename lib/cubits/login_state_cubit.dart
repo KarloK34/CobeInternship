@@ -1,3 +1,4 @@
+import 'package:first_project/models/auth_data.dart';
 import 'package:first_project/services/auth_service.dart';
 import 'package:first_project/cubits/singletons/user_cubit.dart';
 import 'package:first_project/get_it/get_it.dart';
@@ -17,30 +18,30 @@ class LoginStateCubit extends Cubit<RequestState> {
   Future<void> handleLogin({
     required GlobalKey<FormBuilderState> formKey,
     required BuildContext context,
-    required String email,
-    required String password,
+    required AuthData authData,
   }) async {
-    if (formKey.currentState == null) return;
-    final bool isValid = formKey.currentState!.saveAndValidate();
+    final formState = formKey.currentState;
 
-    if (!(isValid && state == const InitialState())) return;
+    if (formState == null) return;
+
+    final bool isFormValid = formState.saveAndValidate();
+    final bool isInInitialState = state == const InitialState();
+    final bool isInErrorState = state == const ErrorState();
+
+    if (!(isFormValid && (isInInitialState || isInErrorState))) return;
 
     _setStatus(const LoadingState());
 
-    final credentials = {'email': email, 'password': password};
-
     try {
-      final response = await getIt<AuthService>().signIn(credentials);
+      final response = await getIt<AuthService>().signIn(authData.toJson());
       final user = response.user;
 
       final token = Token(response.accessToken, response.refreshToken, response.expiresAt);
       tokenBox.put(user.id, token);
       getIt<UserCubit>().logIn(user);
       _setStatus(const SuccessState());
-      _setStatus(const InitialState());
     } catch (e) {
       _setStatus(const ErrorState());
-      _setStatus(const InitialState());
     }
   }
 

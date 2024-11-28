@@ -1,15 +1,13 @@
 import 'package:first_project/cubits/all_requests_cubit.dart';
 import 'package:first_project/cubits/form_state_cubit.dart';
 import 'package:first_project/cubits/pending_request_cubit.dart';
-import 'package:first_project/cubits/singletons/user_cubit.dart';
+import 'package:first_project/models/leave_request_for_creation.dart';
 import 'package:first_project/services/data_service.dart';
 import 'package:first_project/get_it/get_it.dart';
 import 'package:first_project/models/date.dart';
 import 'package:first_project/models/date_range.dart';
-import 'package:first_project/models/leave_request.dart';
 import 'package:first_project/ui_components/shareable/request_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uuid/uuid.dart';
 
 class CreateRequestCubit extends Cubit<RequestState> {
   FormStateCubit formStateCubit;
@@ -26,15 +24,12 @@ class CreateRequestCubit extends Cubit<RequestState> {
     }
     emit(const LoadingState());
 
-    final user = getIt<UserCubit>().state;
     final startDate = form.startDate;
     final endDate = form.endDate;
     final reason = form.reason;
     final type = form.leaveType;
     final visibility = form.visibility;
-    final request = LeaveRequest(
-      Uuid().v4(),
-      user!.id,
+    final request = LeaveRequestForCreation(
       type,
       reason,
       visibility,

@@ -3,6 +3,7 @@ import 'package:first_project/cubits/login_state_cubit.dart';
 import 'package:first_project/cubits/password_cubit.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
+import 'package:first_project/models/auth_data.dart';
 import 'package:first_project/ui_components/shareable/request_state.dart';
 import 'package:first_project/screens/home_screen.dart';
 import 'package:first_project/ui_components/shareable/pop_up_dialog.dart';
@@ -59,11 +60,11 @@ class LoginButton extends StatelessWidget {
           onPressed: () {
             final email = context.read<EmailCubit>().state;
             final password = context.read<PasswordCubit>().state;
+            final authData = AuthData(email: email, password: password);
             context.read<LoginStateCubit>().handleLogin(
                   formKey: formKey,
                   context: context,
-                  email: email,
-                  password: password,
+                  authData: authData,
                 );
           },
           child: BlocBuilder<LoginStateCubit, RequestState>(

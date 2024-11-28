@@ -28,12 +28,7 @@ class LeaveRequest {
   LeaveRequest(this.id, this.createdById, this.leaveType, this.reason, this.viewType, this.dateRange, [this.status = LeaveRequestStatus.pending]);
 
   factory LeaveRequest.fromJson(Map<String, dynamic> json) => _$LeaveRequestFromJson(json);
-  Map<String, dynamic> toJson() => {
-        'leaveType': _$LeaveTypeEnumMap[leaveType]!,
-        'reason': reason,
-        'viewType': _$RequestVisibilityEnumMap[viewType]!,
-        'dateRange': dateRange.toJson(),
-      };
+  Map<String, dynamic> toJson() => _$LeaveRequestToJson(this);
 
   int get numberOfDays => dateRange.end.dateAsDateTime.difference(dateRange.start.dateAsDateTime).inDays;
 }

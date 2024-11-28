@@ -19,7 +19,6 @@ import 'package:first_project/models/user.dart';
 import 'package:first_project/repositories/leave_request_repository.dart';
 import 'package:first_project/routes/app_routes.dart';
 import 'package:first_project/screens/splash_screen.dart';
-import 'package:first_project/repositories/user_repository.dart';
 import 'package:first_project/utilities/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,6 +55,7 @@ void main() async {
   registerHiveAdapters();
   await HiveBoxes.init();
   configureDependencies();
+  getIt<AllUsersCubit>().loadUsers();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -67,7 +67,6 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => FabCubit()),
-        BlocProvider(create: (context) => AllUsersCubit(getIt<UserRepository>())..loadUsers()),
         BlocProvider(create: (context) => AllRequestsCubit(getIt<LeaveRequestRepository>())..loadRequests()),
         BlocProvider(create: (context) => ApprovedRequestCubit(context.read<AllRequestsCubit>())),
         BlocProvider(create: (context) => PendingRequestCubit(context.read<AllRequestsCubit>())),

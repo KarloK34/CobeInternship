@@ -5,6 +5,7 @@ import 'package:first_project/enums/leave_request_status.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/extensions/string_extensions.dart';
+import 'package:first_project/get_it/get_it.dart';
 import 'package:first_project/models/leave_request.dart';
 import 'package:first_project/models/user.dart';
 import 'package:first_project/screens/approved_requests_screen.dart';
@@ -105,20 +106,23 @@ class RequestBoardScreen extends StatelessWidget {
                         child: ListView.builder(
                           itemCount: pendingRequests.length,
                           itemBuilder: (context, index) {
-                            return BlocBuilder<AllUsersCubit, RequestState<List<User>>>(
-                              builder: (context, state) {
-                                final users = state is SuccessState<List<User>> ? state.data : <User>[];
-                                final user = users!.firstWhere((user) => user.id == pendingRequests[index].createdById);
-                                return Column(
-                                  children: [
-                                    AdminTypeOfLeaveTile(
-                                      request: pendingRequests[index],
-                                      user: user,
-                                    ),
-                                    SizedBox(height: 12),
-                                  ],
-                                );
-                              },
+                            return BlocProvider.value(
+                              value: getIt<AllUsersCubit>(),
+                              child: BlocBuilder<AllUsersCubit, RequestState<List<User>>>(
+                                builder: (context, state) {
+                                  final users = state is SuccessState<List<User>> ? state.data : <User>[];
+                                  final user = users!.firstWhere((user) => user.id == pendingRequests[index].createdById);
+                                  return Column(
+                                    children: [
+                                      AdminTypeOfLeaveTile(
+                                        request: pendingRequests[index],
+                                        user: user,
+                                      ),
+                                      SizedBox(height: 12),
+                                    ],
+                                  );
+                                },
+                              ),
                             );
                           },
                         ),

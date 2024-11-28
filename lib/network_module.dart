@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:first_project/models/refresh_token.dart';
 import 'package:first_project/services/auth_service.dart';
 import 'package:first_project/cubits/singletons/user_cubit.dart';
 import 'package:first_project/get_it/get_it.dart';
@@ -26,9 +27,9 @@ abstract class NetworkModule {
         },
         onError: (DioException e, handler) async {
           if (e.response?.statusCode == 401) {
-            final refreshToken = HiveBoxes.token.get(getIt<UserCubit>().state!.id)!.refreshToken;
+            final refreshToken = RefreshToken(HiveBoxes.token.get(getIt<UserCubit>().state!.id)!.refreshToken);
             try {
-              final response = await getIt<AuthService>().refreshToken({'refresh_token': refreshToken});
+              final response = await getIt<AuthService>().refreshToken(refreshToken.toJson());
               final newToken = Token(response.accessToken, response.refreshToken, response.expiresAt);
               HiveBoxes.token.put(getIt<UserCubit>().state!.id, newToken);
 
