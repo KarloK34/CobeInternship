@@ -106,23 +106,21 @@ class RequestBoardScreen extends StatelessWidget {
                         child: ListView.builder(
                           itemCount: pendingRequests.length,
                           itemBuilder: (context, index) {
-                            return BlocProvider.value(
-                              value: getIt<AllUsersCubit>(),
-                              child: BlocBuilder<AllUsersCubit, RequestState<List<User>>>(
-                                builder: (context, state) {
-                                  final users = state is SuccessState<List<User>> ? state.data : <User>[];
-                                  final user = users!.firstWhere((user) => user.id == pendingRequests[index].createdById);
-                                  return Column(
-                                    children: [
-                                      AdminTypeOfLeaveTile(
-                                        request: pendingRequests[index],
-                                        user: user,
-                                      ),
-                                      SizedBox(height: 12),
-                                    ],
-                                  );
-                                },
-                              ),
+                            return BlocBuilder<AllUsersCubit, RequestState<List<User>>>(
+                              bloc: getIt<AllUsersCubit>(),
+                              builder: (context, state) {
+                                final users = state is SuccessState<List<User>> ? state.data : <User>[];
+                                final user = users!.firstWhere((user) => user.id == pendingRequests[index].createdById);
+                                return Column(
+                                  children: [
+                                    AdminTypeOfLeaveTile(
+                                      request: pendingRequests[index],
+                                      user: user,
+                                    ),
+                                    SizedBox(height: 12),
+                                  ],
+                                );
+                              },
                             );
                           },
                         ),

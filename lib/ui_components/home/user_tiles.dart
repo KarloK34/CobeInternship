@@ -14,19 +14,17 @@ class UserTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: getIt<AllUsersCubit>(),
-      child: BlocBuilder<AllUsersCubit, RequestState<List<User>>>(
-        builder: (context, state) {
-          return switch (state) {
-            ErrorState() => Text('Lol some error'),
-            SuccessState() => _Content(),
-            _ => Center(
-                child: CircularProgressIndicator(),
-              ),
-          };
-        },
-      ),
+    return BlocBuilder<AllUsersCubit, RequestState<List<User>>>(
+      bloc: getIt<AllUsersCubit>(),
+      builder: (context, state) {
+        return switch (state) {
+          ErrorState() => Text('Lol some error'),
+          SuccessState() => _Content(),
+          _ => Center(
+              child: CircularProgressIndicator(),
+            ),
+        };
+      },
     );
   }
 }
