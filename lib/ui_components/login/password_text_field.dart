@@ -15,6 +15,8 @@ class PasswordTextField extends StatefulWidget {
 }
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
+  final TextEditingController _controller = TextEditingController();
+
   bool _isObscure = true;
 
   void _toggleVisibility() {
@@ -25,32 +27,38 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderTextField(
-        name: 'password',
-        obscureText: _isObscure,
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: context.onSecondary,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: context.onBackgroundVariant),
-          ),
-          suffixIcon: IconButton(
-            onPressed: _toggleVisibility,
-            icon: Icon(
-              _isObscure ? Icons.visibility_off : Icons.visibility,
-              color: context.onBackgroundVariant,
+    return BlocListener<PasswordCubit, String>(
+      listener: (context, state) {
+        _controller.text = state;
+      },
+      child: FormBuilderTextField(
+          controller: _controller,
+          name: 'password',
+          obscureText: _isObscure,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: context.onSecondary,
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: context.onBackgroundVariant),
+            ),
+            suffixIcon: IconButton(
+              onPressed: _toggleVisibility,
+              icon: Icon(
+                _isObscure ? Icons.visibility_off : Icons.visibility,
+                color: context.onBackgroundVariant,
+              ),
             ),
           ),
-        ),
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(),
-        ]),
-        onChanged: (value) {
-          if (value != null) {
-            context.read<PasswordCubit>().updatePassword(value);
-          }
-        });
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(),
+          ]),
+          onChanged: (value) {
+            if (value != null) {
+              context.read<PasswordCubit>().updatePassword(value);
+            }
+          }),
+    );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:first_project/cubits/all_users_cubit.dart';
+import 'package:first_project/ui_components/shareable/connectivity_indicator.dart';
 import 'package:first_project/cubits/singletons/app_lifecycle_cubit.dart';
 import 'package:first_project/cubits/fab_cubit.dart';
 import 'package:first_project/cubits/filtered_users_cubit.dart';
@@ -58,7 +58,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         BlocProvider(create: (context) => SearchQueryCubit()),
         BlocProvider(
           create: (context) => FilteredUsersCubit(
-            allUsersCubit: context.read<AllUsersCubit>(),
             selectedFiltersCubit: context.read<SelectedFiltersCubit>(),
             searchQueryCubit: context.read<SearchQueryCubit>(),
           ),
@@ -76,6 +75,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   child: SafeArea(
                     child: Column(
                       children: [
+                        ConnectivityIndicator(),
                         MyAppBar(),
                         if (user != null && user.isAdmin) ManageRequestsList(),
                         SizedBox(height: 22),
@@ -102,13 +102,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         SizedBox(
-                          width: 132,
+                          width: 146,
                           height: 36,
                           child: AddAbsenceButton(),
                         ),
                         SizedBox(height: 10),
                         SizedBox(
-                          width: 154,
+                          width: 168,
                           height: 36,
                           child: CreateRequestButton(),
                         ),

@@ -1,34 +1,35 @@
-import 'package:first_project/enums/connection_status.dart';
 import 'package:first_project/enums/leave_type.dart';
-import 'package:first_project/enums/role.dart';
 import 'package:hive/hive.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'user.g.dart';
+part 'generated/user.g.dart';
 
+@JsonSerializable()
 @HiveType(typeId: 1)
 class User {
   @HiveField(0)
-  final int id;
+  final String id;
   @HiveField(1)
   final String name;
   @HiveField(2)
-  final String surname;
+  final String email;
   @HiveField(3)
-  final Role role;
+  String imageUrl;
   @HiveField(4)
-  String profilePicture;
+  final String role;
   @HiveField(5)
-  ConnectionStatus status = ConnectionStatus.offline;
+  bool isOnline = false;
   @HiveField(6)
   LeaveType? currentLeaveType;
   @HiveField(7)
-  final bool? _isAdmin;
+  final bool isAdmin;
 
-  User(this.id, this.name, this.surname, this.role, this.profilePicture, this.status, [this._isAdmin = false]);
+  User(this.id, this.name, this.email, this.role, this.imageUrl, this.isOnline, this.currentLeaveType, this.isAdmin);
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 
   void toggleConnectionStatus() {
-    status = status == ConnectionStatus.offline ? ConnectionStatus.online : ConnectionStatus.online;
+    isOnline = !isOnline;
   }
-
-  bool get isAdmin => _isAdmin ?? false;
 }

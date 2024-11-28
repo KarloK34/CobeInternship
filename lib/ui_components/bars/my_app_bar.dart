@@ -1,6 +1,8 @@
+import 'package:first_project/cubits/singletons/user_cubit.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
-import 'package:first_project/utilities/app_images.dart';
+import 'package:first_project/get_it/get_it.dart';
+import 'package:first_project/screens/public_profile_page.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget {
@@ -13,15 +15,24 @@ class MyAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            height: 44.0,
-            width: 44.0,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppImages.dummyProfile),
-                fit: BoxFit.fitWidth,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                PublicProfilePage.routeName,
+                arguments: getIt<UserCubit>().state!,
+              );
+            },
+            child: Container(
+              height: 44.0,
+              width: 44.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(getIt<UserCubit>().state!.imageUrl),
+                  fit: BoxFit.fitWidth,
+                ),
+                shape: BoxShape.circle,
               ),
-              shape: BoxShape.circle,
             ),
           ),
           const SizedBox(width: 15),
@@ -53,7 +64,7 @@ class MyAppBar extends StatelessWidget {
             child: RawMaterialButton(
               onPressed: () {},
               elevation: 2.0,
-              fillColor: Colors.white,
+              fillColor: context.onSecondary,
               shape: const CircleBorder(),
               child: Icon(
                 Icons.notifications_none_outlined,

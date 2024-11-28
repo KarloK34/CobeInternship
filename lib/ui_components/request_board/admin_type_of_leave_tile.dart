@@ -20,8 +20,8 @@ class AdminTypeOfLeaveTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedStartDate = DateFormat('MMM dd').format(request.startDate);
-    String formattedEndDate = DateFormat('MMM dd').format(request.endDate);
+    String formattedStartDate = DateFormat('MMM dd').format(request.dateRange.start.dateAsDateTime);
+    String formattedEndDate = DateFormat('MMM dd').format(request.dateRange.end.dateAsDateTime);
 
     return Container(
       margin: EdgeInsets.only(right: 12),
@@ -34,7 +34,7 @@ class AdminTypeOfLeaveTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            request.type.name.capitalize(),
+            request.leaveType.name.capitalize(),
             style: context.bodyLarge,
           ),
           Text(
@@ -53,7 +53,7 @@ class AdminTypeOfLeaveTile extends StatelessWidget {
                   width: 32.0,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(user.profilePicture),
+                      image: NetworkImage(user.imageUrl),
                       fit: BoxFit.fitWidth,
                     ),
                     shape: BoxShape.circle,
