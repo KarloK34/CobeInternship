@@ -18,5 +18,8 @@ class DateRange {
   });
 
   factory DateRange.fromJson(Map<String, dynamic> json) => _$DateRangeFromJson(json);
-  Map<String, dynamic> toJson() => _$DateRangeToJson(this);
+  Map<String, dynamic> toJson() => {
+        "start": start.toJson(),
+        "end": end.toJson(),
+      };
 }
