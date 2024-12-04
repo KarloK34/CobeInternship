@@ -1,4 +1,3 @@
-import 'package:first_project/enums/connection_status.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/models/user.dart';
@@ -20,7 +19,7 @@ class UserContainer extends StatelessWidget {
       child: Container(
         height: 96,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.onSecondary,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
@@ -34,13 +33,13 @@ class UserContainer extends StatelessWidget {
                   width: 56.0,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(user.profilePicture),
+                      image: NetworkImage(user.imageUrl),
                       fit: BoxFit.fitWidth,
                     ),
                     shape: BoxShape.circle,
                   ),
                 ),
-                if (user.status == ConnectionStatus.online)
+                if (user.isOnline)
                   Container(
                     height: 12,
                     width: 12,
@@ -48,7 +47,7 @@ class UserContainer extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: context.tertiary,
                         border: Border.all(
-                          color: Colors.white,
+                          color: context.onSecondary,
                         )),
                   )
               ],
@@ -59,15 +58,15 @@ class UserContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${user.name} ${user.surname}',
+                  user.name,
                   style: context.bodyLarge,
                 ),
                 Text(
                   'Text here',
                   style: context.labelMedium!.copyWith(
-                        fontSize: 13.0,
-                        color: context.onBackgroundVariant,
-                      ),
+                    fontSize: 13.0,
+                    color: context.onBackgroundVariant,
+                  ),
                 ),
               ],
             ),

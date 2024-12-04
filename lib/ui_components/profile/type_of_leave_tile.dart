@@ -16,21 +16,21 @@ class TypeOfLeaveTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedStartDate = DateFormat('MMM dd').format(request.startDate);
-    String formattedEndDate = DateFormat('MMM dd').format(request.endDate);
+    String formattedStartDate = DateFormat('MMM dd').format(request.dateRange.start.dateAsDateTime);
+    String formattedEndDate = DateFormat('MMM dd').format(request.dateRange.end.dateAsDateTime);
 
     return Container(
       margin: EdgeInsets.only(right: 12),
       padding: const EdgeInsets.only(top: 15, left: 14, bottom: 12, right: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.onSecondary,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            request.type.name.capitalize(),
+            request.leaveType.name.capitalize(),
             style: context.bodyLarge,
           ),
           Text(

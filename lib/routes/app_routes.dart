@@ -41,7 +41,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case RequestBoardScreen.routeName:
       return MaterialPageRoute(
         builder: (context) => BlocProvider(
-          create: (context) => UpdateRequestStatusCubit(),
+          create: (context) => UpdateRequestStatusCubit(context.read<AllRequestsCubit>()),
           child: const RequestBoardScreen(),
         ),
       );

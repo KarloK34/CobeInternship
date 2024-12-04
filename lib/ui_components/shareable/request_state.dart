@@ -1,20 +1,20 @@
-sealed class RequestState {
+sealed class RequestState<T> {
   const RequestState();
 }
 
-class InitialState extends RequestState {
+class InitialState<T> extends RequestState<T> {
   const InitialState();
 }
 
-class LoadingState extends RequestState {
+class LoadingState<T> extends RequestState<T> {
   const LoadingState();
 }
 
-class SuccessState<T> extends RequestState {
+class SuccessState<T> extends RequestState<T> {
   final T? data;
   const SuccessState([this.data]);
 }
 
-class ErrorState extends RequestState {
+class ErrorState<T> extends RequestState<T> {
   const ErrorState();
 }

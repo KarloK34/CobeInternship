@@ -1,28 +1,24 @@
 import 'package:first_project/models/user.dart';
+import 'package:first_project/repositories/user_repository.dart';
+import 'package:first_project/ui_components/shareable/request_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
+import 'package:injectable/injectable.dart';
 
-class AllUsersCubit extends Cubit<List<User>> {
-  final userBox = Hive.box<User>('userBox');
+@LazySingleton()
+class AllUsersCubit extends Cubit<RequestState<List<User>>> {
+  final IUserRepository userRepository;
 
-  AllUsersCubit() : super([]);
-
-  void loadUsers() {
-    emit(userBox.values.toList());
-  }
-
-  void addUser(User user) {
-    userBox.add(user);
+  AllUsersCubit(this.userRepository) : super(InitialState()) {
     loadUsers();
   }
 
-  void deleteUser(User user) {
-    final userKey = userBox.keys.firstWhere(
-      (key) => userBox.get(key)!.id == user.id,
-      orElse: () => null,
-    );
-    if (userKey == null) return;
-    userBox.delete(userKey);
-    loadUsers();
+  void loadUsers() async {
+    try {
+      emit(const LoadingState());
+      final users = await userRepository.fetchUsers();
+      emit(SuccessState(users));
+    } catch (e) {
+      emit(const ErrorState());
+    }
   }
 }

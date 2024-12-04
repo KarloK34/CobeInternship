@@ -14,7 +14,12 @@ class Logo extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(AppImages.splashLogo),
+          Image.asset(
+            AppImages.splashLogo,
+            height: MediaQuery.of(context).size.height * 0.18,
+            width: MediaQuery.of(context).size.height * 0.15,
+            fit: BoxFit.fill,
+          ),
           Text(
             'Hive',
             style: context.titleLargeBold!.copyWith(color: context.primaryColor),

@@ -1,3 +1,4 @@
+import 'package:first_project/ui_components/shareable/connectivity_indicator.dart';
 import 'package:first_project/extensions/context_extensions/colors.dart';
 import 'package:first_project/extensions/context_extensions/text_styles.dart';
 import 'package:first_project/ui_components/buttons/admin_radio_button.dart';
@@ -37,6 +38,7 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          ConnectivityIndicator(),
           const SizedBox(height: 44),
           const LeaveTypeField(),
           const SizedBox(height: 10),
@@ -68,7 +70,7 @@ class _CreateRequestScreenState extends State<CreateRequestScreen> {
               SizedBox(width: 37),
               DiscardRequestButton(),
             ],
-          )
+          ),
         ],
       ),
     );

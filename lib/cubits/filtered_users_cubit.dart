@@ -2,13 +2,13 @@ import 'dart:async';
 import 'package:first_project/cubits/all_users_cubit.dart';
 import 'package:first_project/cubits/search_query_cubit.dart';
 import 'package:first_project/cubits/selected_filters_cubit.dart';
-import 'package:first_project/enums/connection_status.dart';
 import 'package:first_project/enums/leave_type.dart';
+import 'package:first_project/get_it/get_it.dart';
 import 'package:first_project/models/user.dart';
+import 'package:first_project/ui_components/shareable/request_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FilteredUsersCubit extends Cubit<List<User>> {
-  final AllUsersCubit allUsersCubit;
   final SelectedFiltersCubit selectedFiltersCubit;
   final SearchQueryCubit searchQueryCubit;
 
@@ -21,19 +21,20 @@ class FilteredUsersCubit extends Cubit<List<User>> {
   late final StreamSubscription searchQuerySubscription;
 
   FilteredUsersCubit({
-    required this.allUsersCubit,
     required this.selectedFiltersCubit,
     required this.searchQueryCubit,
   }) : super([]) {
-    _allUsers = allUsersCubit.state;
+    final usersState = getIt<AllUsersCubit>().state;
+    _allUsers = (usersState is SuccessState<List<User>> ? usersState.data : <User>[]) ?? <User>[];
     _selectedFilters = selectedFiltersCubit.state;
     _searchQuery = searchQueryCubit.state;
 
     _filterUsers();
 
-    usersSubscription = allUsersCubit.stream.listen(
-      (allUsers) {
-        _allUsers = allUsers;
+    usersSubscription = getIt<AllUsersCubit>().stream.listen(
+      (state) {
+        final users = state is SuccessState<List<User>> ? state.data : <User>[];
+        _allUsers = users ?? [];
         _filterUsers();
       },
     );
@@ -52,7 +53,7 @@ class FilteredUsersCubit extends Cubit<List<User>> {
   }
   void _filterUsers() {
     final filteredUsers = _allUsers.where((user) {
-      final fullname = '${user.name} ${user.surname}';
+      final fullname = user.name;
 
       final matchesSearch = fullname.toLowerCase().contains(_searchQuery.toLowerCase());
 
@@ -60,9 +61,9 @@ class FilteredUsersCubit extends Cubit<List<User>> {
           _selectedFilters.any((filter) {
             switch (filter) {
               case 'Online':
-                return user.status == ConnectionStatus.online;
+                return user.isOnline;
               case 'Offline':
-                return user.status == ConnectionStatus.offline;
+                return !user.isOnline;
               case 'Sick':
                 return user.currentLeaveType == LeaveType.sick;
               case 'Vacation':
